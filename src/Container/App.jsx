@@ -1,8 +1,8 @@
-import React from 'react'
 import { Navbar } from '../components';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import Home from '../components/Pages/Home/Home';
 
 const theme = createMuiTheme({
     palette: {
@@ -13,6 +13,7 @@ const theme = createMuiTheme({
             main: '#525252'
         }
     }
+
 })
 
 const App = () => {
@@ -21,6 +22,9 @@ const App = () => {
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <Navbar />
+                <main>
+                    <Home />
+                </main>
             </ThemeProvider>
         </>
     )
