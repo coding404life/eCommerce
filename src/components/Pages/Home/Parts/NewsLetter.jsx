@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         textTransform: 'uppercase'
     },
     textField: {
-        padding: '5px',
+        padding: theme.spacing(1),
         backgroundColor: 'inherit',
         border: '1px solid #444',
         borderRadius: '3px',
@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
     },
     form: {
         width: '40vw'
+    },
+    sendIcon:{
+        cursor:'pointer'
     }
 }))
 const NewsLetter = () => {
@@ -42,12 +45,13 @@ const NewsLetter = () => {
                 <Typography component='span' color='textSecondary'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia aspernatur esse inventore vero dolore, quos quod alias delectus sunt magnam ex.</Typography>
             </Box>
             <form className={classes.form}>
-                <Input type="text" className={classes.textField} placeholder='subscribe to our news letter'
-                    startAdornment={
+                <Input type="text" className={classes.textField} 
+                    endAdornment={
                         <InputAdornment position="end">
-                            <SendOutlinedIcon />
+                            <SendOutlinedIcon className={classes.sendIcon} />
                         </InputAdornment>
-                    } />
+                    }
+                    placeholder='subscribe to our news letter' />
             </form>
         </Box>
     )
