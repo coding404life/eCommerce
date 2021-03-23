@@ -1,4 +1,4 @@
-import { Navbar } from '../components';
+import { Footer, Navbar } from '../components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -12,8 +12,7 @@ const theme = createMuiTheme({
         secondary: {
             main: '#525252'
         }
-    }
-
+    },
 })
 
 const App = () => {
@@ -25,6 +24,7 @@ const App = () => {
                 <main>
                     <Home />
                 </main>
+                <Footer />
             </ThemeProvider>
         </>
     )
