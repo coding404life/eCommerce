@@ -8,7 +8,8 @@ const useStyles = makeStyles(theme => ({
     },
     logoIcon: {
         fontSize: '3rem',
-        color: theme.palette.primary.main
+        color: theme.palette.primary.main,
+
     },
     IconButton: {
         '& span': {
@@ -20,6 +21,10 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         color: '#fff',
+        '& a': {
+            color: '#fff',
+            textDecoration: 'none'
+        },
         '&:hover': {
             backgroundColor: theme.palette.primary.contrastText
         }
