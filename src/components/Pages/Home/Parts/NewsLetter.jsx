@@ -8,14 +8,14 @@ const useStyles = makeStyles(theme => ({
         backgroundImage: `url(${NewsLetterBg})`,
         backgroundSize: 'auto',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right',
+        backgroundPosition: 'top',
         backgroundAttachment: 'fixed',
         height: '45vh',
         textAlign: 'center',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     upperCase: {
         textTransform: 'uppercase'
@@ -28,24 +28,32 @@ const useStyles = makeStyles(theme => ({
         width: '100%'
     },
     form: {
-        width: '40vw'
+        width: '80%',
+        [ theme.breakpoints.up('sm') ]: {
+            width: '40%'
+        }
     },
-    sendIcon:{
-        cursor:'pointer'
+    sendIcon: {
+        cursor: 'pointer'
+    },
+    boxTextWidth: {
+        [ theme.breakpoints.up('sm') ]: {
+            width: '50%'
+        }
     }
 }))
 const NewsLetter = () => {
     const classes = useStyles();
     return (
-        <Box my={10} py={4} className={classes.root}>
+        <Box my={10} py={4} className={classes.root} justifyContent='center'>
             <Typography variant='h5'>
                 <Box fontWeight='bold' className={classes.upperCase}>Sign up to news letter</Box>
             </Typography>
-            <Box width='40%' textAlign="center" mt={1} mb={5}>
+            <Box className={classes.boxTextWidth} textAlign="center" mt={1} mb={5}>
                 <Typography component='span' color='textSecondary'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia aspernatur esse inventore vero dolore, quos quod alias delectus sunt magnam ex.</Typography>
             </Box>
             <form className={classes.form}>
-                <Input type="text" className={classes.textField} 
+                <Input type="text" className={classes.textField}
                     endAdornment={
                         <InputAdornment position="end">
                             <SendOutlinedIcon className={classes.sendIcon} />
