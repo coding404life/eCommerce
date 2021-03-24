@@ -1,44 +1,9 @@
 import { Box, Container, Grid, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import PhoneOutlinedIcon from '@material-ui/icons/PhoneOutlined';
 import MailOutlineOutlinedIcon from '@material-ui/icons/MailOutlineOutlined';
 import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
-const useStyles = makeStyles(theme => ({
-    root: {
-        backgroundColor: theme.palette.secondary.dark,
-        color: '#fff',
-    },
-    footerHeading: {
-        textTransform: 'uppercase',
-        paddingLeft: '1em',
-        zIndex: '1',
-        position: 'relative',
-        '&:before': {
-            content: '""',
-            position: 'absolute',
-            bottom: 5,
-            left: 0,
-            width: '3px',
-            height: '1.2rem',
-            display: 'block',
-            background: theme.palette.primary.main
-        }
-    },
-    spacingLeft: {
-        marginLeft: theme.spacing(1)
-    },
-    footerList: {
-        padding: '0 1rem',
-        '& li': {
-            cursor: 'pointer',
-            margin: '8px 0',
-            '&:hover': {
-                color: theme.palette.primary.main
-            }
-        }
-    }
-}));
+import useStyles from './Styles'
 
 const Footer = () => {
     const classes = useStyles();
@@ -51,20 +16,20 @@ const Footer = () => {
                         <Typography variant='h6' className={classes.footerHeading}>
                             <Box fontWeight='bold'>about store</Box>
                         </Typography>
-                        <Box my={3}>
-                            <Box display='flex' my={1}>
+                        <Box my={3} className={classes.smallScreenCenter}>
+                            <Box display='flex' my={1} className={classes.boxScreenCenter}>
                                 <HomeOutlinedIcon />
                                 <Typography component='span' className={classes.spacingLeft}>123 soltana street</Typography>
                             </Box>
-                            <Box display='flex' my={1}>
+                            <Box display='flex' my={1} className={classes.boxScreenCenter}>
                                 <PhoneOutlinedIcon />
                                 <Typography component='span' className={classes.spacingLeft}>(800) 123 456 789</Typography>
                             </Box>
-                            <Box display='flex' my={1}>
+                            <Box display='flex' my={1} className={classes.boxScreenCenter}>
                                 <MailOutlineOutlinedIcon />
                                 <Typography component='span' className={classes.spacingLeft}>coding404life@gmail.com</Typography>
                             </Box>
-                            <Box display='flex' >
+                            <Box display='flex' className={classes.boxScreenCenter}>
                                 <CreditCardOutlinedIcon className={classes.spacingLeft} />
                                 <CreditCardOutlinedIcon className={classes.spacingLeft} />
                                 <CreditCardOutlinedIcon className={classes.spacingLeft} />
@@ -77,7 +42,7 @@ const Footer = () => {
                         <Typography variant='h6' className={classes.footerHeading}>
                             <Box fontWeight='bold'>my account</Box>
                         </Typography>
-                        <Box display='flex' >
+                        <Box className={classes.boxResponsiveStyles}>
                             <ul className={classes.footerList}>
                                 <li>My Account</li>
                                 <li>Login</li>
@@ -92,7 +57,7 @@ const Footer = () => {
                         <Typography variant='h6' className={classes.footerHeading}>
                             <Box >information</Box>
                         </Typography>
-                        <Box display='flex' >
+                        <Box className={classes.boxResponsiveStyles} >
                             <ul className={classes.footerList}>
                                 <li>About us</li>
                                 <li>Career</li>
@@ -107,7 +72,7 @@ const Footer = () => {
                         <Typography variant='h6' className={classes.footerHeading}>
                             <Box fontWeight='bold'>customer service</Box>
                         </Typography>
-                        <Box display='flex' >
+                        <Box className={classes.boxResponsiveStyles} >
                             <ul className={classes.footerList}>
                                 <li>Shipping Policy</li>
                                 <li>Compensation First</li>
