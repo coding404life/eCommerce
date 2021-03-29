@@ -21,9 +21,13 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         color: '#fff',
+        padding: '0',
+        marginLeft: theme.spacing(1),
         '& a': {
             color: '#fff',
-            textDecoration: 'none'
+            textDecoration: 'none',
+            width: '100%',
+            padding: '6px 8px'
         },
         '&:hover': {
             backgroundColor: theme.palette.primary.contrastText

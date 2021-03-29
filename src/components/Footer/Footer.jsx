@@ -9,7 +9,7 @@ const Footer = () => {
     const classes = useStyles();
 
     return (
-        <Box className={classes.root} py={10}>
+        <Box className={classes.root} py={10} component='footer'>
             <Container>
                 <Grid container justify='center' >
                     <Grid item xs={12} sm={6} md={3}>

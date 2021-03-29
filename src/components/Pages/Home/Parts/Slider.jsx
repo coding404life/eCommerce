@@ -75,7 +75,7 @@ const Item = ({ item }) => {
 const Slider = () => {
     const classes = useStyles();
 
-    var items = [
+    const items = [
         {
             img: sliderImg1,
             name: "new arrivals",
@@ -105,20 +105,19 @@ const Slider = () => {
             paragraph: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum assumenda quos similique obcaecati ex mollitia, minus nihil '
         }
     ]
+
     return (
         <Carousel
             indicators={false}
             navButtonsProps={{ className: classes.navButtons }}
-            navButtonsWrapperProps={{   // Move the buttons to the bottom. Unsetting top here to override default style.
+            navButtonsWrapperProps={{ // Move the bottom. override default style.
                 style: {
                     top: '-2em'
                 },
             }}
         >
-            {
-                items.map((item, i) => <Item key={i} item={item} />)
-            }
-        </Carousel>
+            {items.map((item, i) => <Item key={i} item={item} />)}
+        </Carousel >
     )
 }
 
