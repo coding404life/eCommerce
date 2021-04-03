@@ -4,7 +4,6 @@ import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-u
 import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-
 const theme = createMuiTheme({
     palette: {
         primary: {

@@ -1,10 +1,14 @@
-import { Box, Breadcrumbs, Container, Grid, Typography, makeStyles } from "@material-ui/core"
+import { Box, Breadcrumbs, Container, Grid, Typography, makeStyles, Divider } from "@material-ui/core"
 import { Link } from "react-router-dom";
+import Sidebar from './Sidebar';
+import Product from './products/Product';
 import Banner from '../../common/Banner';
+import TopBar from "./TopBar";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginTop: theme.spacing(4)
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(2),
     },
     linkItems: {
         color: theme.palette.secondary.main,
@@ -25,13 +29,20 @@ const Shop = () => {
                 <Breadcrumbs className={classes.root} aria-label="breadcrumb">
                     <Link className={classes.linkItems} to="/" >Home</Link>
                     <Link className={classes.linkItems} color="inherit" to="/shop">Shop</Link>
-                    <Typography className={classes.activeMenu}>Shoes</Typography>
+                    <Typography className={classes.activeMenu}>All</Typography>
                 </Breadcrumbs>
-                <Grid container>
-                    <Grid item >
-
+                <Divider />
+                <Box mt={4}>
+                    <Grid container>
+                        <Grid item xs={12} sm={2}>
+                            <Sidebar />
+                        </Grid>
+                        <Grid item xs={12} sm={10}>
+                            <TopBar />
+                            <Product />
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Box>
             </Container>
         </Box>
     )
