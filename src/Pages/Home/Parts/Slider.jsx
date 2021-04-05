@@ -1,46 +1,11 @@
+import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { Box, Button, Container, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import sliderImg1 from '../../../assets/slider-1.jpg'
 import sliderImg2 from '../../../assets/slider-2.jpg'
 import sliderImg3 from '../../../assets/slider-3.jpg'
 import sliderImg4 from '../../../assets/slider-4.jpg'
-
-import { makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles(theme => ({
-    carouselText: {
-        textTransform: 'uppercase',
-        [ theme.breakpoints.down('sm') ]: {
-            margin: 0,
-            textAlign: 'center'
-        }
-    },
-    caroselParagraph: {
-        textTransform: 'lowercase',
-        [ theme.breakpoints.down('sm') ]: {
-            width: '100%',
-        }
-    },
-    boxContainer: {
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        height: '70vh'
-    },
-    shopBtn: {
-        border: `2px solid ${theme.palette.secondary.main}`
-    },
-    navButtons: {
-        backgroundColor: '#333',
-        opacity: .4,
-        '&:hover': {
-            backgroundColor: '#79B6C8 !important',
-            opacity: 1
-        }
-    }
-
-}));
-
 
 const Item = ({ item }) => {
     const classes = useStyles();
@@ -70,9 +35,10 @@ const Item = ({ item }) => {
             </Container>
         </Box>
     )
-}
+};
 
 const Slider = () => {
+
     const classes = useStyles();
 
     const items = [
@@ -120,6 +86,42 @@ const Slider = () => {
         </Carousel >
     )
 }
+
+
+const useStyles = makeStyles(theme => ({
+    carouselText: {
+        textTransform: 'uppercase',
+        [ theme.breakpoints.down('sm') ]: {
+            margin: 0,
+            textAlign: 'center'
+        }
+    },
+    caroselParagraph: {
+        textTransform: 'lowercase',
+        [ theme.breakpoints.down('sm') ]: {
+            width: '100%',
+        }
+    },
+    boxContainer: {
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        height: '70vh'
+    },
+    shopBtn: {
+        border: `2px solid ${theme.palette.secondary.main}`
+    },
+    navButtons: {
+        backgroundColor: '#333',
+        opacity: .4,
+        '&:hover': {
+            backgroundColor: '#79B6C8 !important',
+            opacity: 1
+        }
+    }
+
+}));
+
 
 
 export default Slider

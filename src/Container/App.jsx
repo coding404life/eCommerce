@@ -1,5 +1,5 @@
 import { Footer, Navbar, NotFound } from '../components';
-import { Home, Shop } from '../Pages'
+import { Home, Shop, SingleProduct, Cart } from '../Pages'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -13,15 +13,11 @@ const App = () => {
                 <Navbar />
                 <main>
                     <Switch>
-                        <Route exact path="/">
-                            <Home />
-                        </Route>
-                        <Route path="/shop">
-                            <Shop />
-                        </Route>
-                        <Route path="*">
-                            <NotFound />
-                        </Route>
+                        <Route exact path="/" component={Home} />
+                        <Route path="/shop" component={Shop} />
+                        <Route path="/SingleProduct" component={SingleProduct} />
+                        <Route path="/cart" component={Cart} />
+                        <Route path="*" component={NotFound} />
                     </Switch>
                 </main>
                 <Footer />

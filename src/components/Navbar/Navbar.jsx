@@ -42,11 +42,13 @@ const Navbar = () => {
                         <IconButton className={classes.IconButton} >
                             <SearchOutlinedIcon />
                         </IconButton>
-                        <IconButton className={classes.IconButton}>
-                            <Badge badgeContent={6} color="primary">
-                                <ShoppingCartOutlinedIcon />
-                            </Badge>
-                        </IconButton>
+                        <Link to="cart">
+                            <IconButton className={classes.IconButton}>
+                                <Badge badgeContent={6} color="primary">
+                                    <ShoppingCartOutlinedIcon />
+                                </Badge>
+                            </IconButton>
+                        </Link>
                     </Box>
                 </Toolbar>
             </Container>

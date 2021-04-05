@@ -2,6 +2,7 @@ import Slider from './Parts/Slider';
 import Cards from './Parts/Cards';
 import { Box } from '@material-ui/core';
 import NewsLetter from './Parts/NewsLetter';
+import React from 'react'
 
 const Home = () => {
     return (
@@ -15,4 +16,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default React.memo(Home)

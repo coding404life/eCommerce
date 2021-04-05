@@ -3,15 +3,17 @@ import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { formatPrice } from '../../../../components/common/Helper';
 import { Link } from 'react-router-dom';
+import chairImg from '../../../../assets/products/product-3.png';
 
 const Product = () => {
     const classes = useStyles();
 
     return (
-        <Box display='flex' flexDirection='column' px={3} py={3} >
+        <Box display='flex' flexDirection='column' px={3} py={3} style={{ transition: 'all 0.3s linear' }} >
             <Box className={classes.container}>
-                <img className={classes.imgStyle} src="https://picsum.photos/200/300" alt="https://picsum.photos/200/300" />
-                <Link className={classes.searchIcon + ' show'} to='#'>
+                <div className={classes.overlay + ' overlay'}></div>
+                <img className={classes.imgStyle} src={chairImg} alt="https://picsum.photos/200/300" />
+                <Link className={classes.searchIcon + ' show'} to='SingleProduct'>
                     <SearchOutlinedIcon />
                 </Link>
             </Box>
@@ -33,17 +35,28 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        borderRadius: 5,
-        backgroundColor: '#222',
+        borderRadius: 10,
+        backgroundColor: '#f5f5f5',
         '&:hover': {
             '& .show': {
-                display: 'flex'
+                opacity: 1,
             },
-            '& img': {
-                opacity: .5,
-                transition: 'all 0.3s linear',
+            '& .overlay': {
+                opacity: .6,
             }
         }
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        borderRadius: 10,
+        backgroundColor: '#333',
+        opacity: 0,
+        zIndex: 100,
+        transition: 'all 0.3s linear'
     },
     searchIcon: {
         position: 'absolute',
@@ -52,11 +65,12 @@ const useStyles = makeStyles(theme => ({
         width: theme.spacing(6),
         height: theme.spacing(6),
         borderRadius: '50%',
-        display: 'none',
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: theme.palette.primary.main,
-        opacity: 1
+        opacity: 0,
+        zIndex: 200
     },
     imgStyle: {
         width: '100%',
