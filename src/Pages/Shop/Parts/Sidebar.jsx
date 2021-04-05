@@ -1,6 +1,7 @@
 import { Box, Button, Divider, IconButton, makeStyles, Slider, Typography } from '@material-ui/core'
 import React from 'react'
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
+import { formatPrice } from '../../../components/common/Helper';
 
 const Sidebar = () => {
     const classes = useStyles();
@@ -10,13 +11,6 @@ const Sidebar = () => {
     const handleSliderChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    const formatPrice = (number) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(number)
-    }
 
     return (
         <Box mt={3} className={classes.root}>
@@ -79,7 +73,7 @@ const Sidebar = () => {
     )
 }
 
-//sidebar styles <3
+//sidebar styles :)
 const useStyles = makeStyles(theme => ({
     root: {
         '& button': {

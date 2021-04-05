@@ -1,9 +1,9 @@
 import Carousel from 'react-material-ui-carousel';
 import { Box, Button, Container, Typography } from '@material-ui/core';
-import sliderImg1 from '../../../../assets/slider-1.jpg'
-import sliderImg2 from '../../../../assets/slider-2.jpg'
-import sliderImg3 from '../../../../assets/slider-3.jpg'
-import sliderImg4 from '../../../../assets/slider-4.jpg'
+import sliderImg1 from '../../../assets/slider-1.jpg'
+import sliderImg2 from '../../../assets/slider-2.jpg'
+import sliderImg3 from '../../../assets/slider-3.jpg'
+import sliderImg4 from '../../../assets/slider-4.jpg'
 
 import { makeStyles } from '@material-ui/core';
 

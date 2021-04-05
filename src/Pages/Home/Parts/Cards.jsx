@@ -1,8 +1,8 @@
 import { Box, Container, Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import productOne from '../../../../assets/products/product-1.png';
-import productTwo from '../../../../assets/products/product-2.png';
-import productThree from '../../../../assets/products/product-3.png';
+import productOne from '../../../assets/products/product-1.png';
+import productTwo from '../../../assets/products/product-2.png';
+import productThree from '../../../assets/products/product-3.png';
 
 const useStyles = makeStyles(theme => ({
     img: {

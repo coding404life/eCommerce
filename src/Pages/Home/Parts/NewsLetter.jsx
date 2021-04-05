@@ -1,7 +1,7 @@
 import { Box, Input, InputAdornment, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
-import NewsLetterBg from '../../../../assets/news-letter.jpg';
+import NewsLetterBg from '../../../assets/news-letter.jpg';
 
 const useStyles = makeStyles(theme => ({
     root: {

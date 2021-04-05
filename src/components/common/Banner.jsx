@@ -1,26 +1,6 @@
 import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core';
-import bannerImg from '../../assets/banner.jpg'
-const useStyles = makeStyles(theme => ({
-    root: {
-        backgroundImage: `url(${bannerImg})`,
-        height: '35vh',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        padding: theme.spacing(1)
-    },
-    textUpperCase: {
-        textTransform: 'uppercase'
-    },
-    collectionBtn: {
-        border: `2px solid ${theme.palette.secondary.main}`
-    }
-}));
+import bannerImg from '../../assets/banner.jpg';
 
 const Banner = () => {
     const classes = useStyles();
@@ -42,5 +22,26 @@ const Banner = () => {
         </Box>
     )
 }
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        backgroundImage: `url(${bannerImg})`,
+        height: '35vh',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'right',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        padding: theme.spacing(1)
+    },
+    textUpperCase: {
+        textTransform: 'uppercase'
+    },
+    collectionBtn: {
+        border: `2px solid ${theme.palette.secondary.main}`
+    }
+}));
 
 export default Banner
