@@ -6,6 +6,7 @@ import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { formatPrice } from '../../components/common/Helper'
+import { Link } from 'react-router-dom';
 
 const SingleProduct = () => {
     const classes = useStyles();
@@ -14,7 +15,7 @@ const SingleProduct = () => {
     return (
         <Box>
             <Container>
-                <BreadCrumb />
+                <BreadCrumb thisRoute='Spacing chair design' />
                 <Grid container justify='space-between' className={classes.root}>
                     <Grid item sm={6} xs={12} >
                         <Box className={classes.productImgContainer}>
@@ -73,7 +74,7 @@ const SingleProduct = () => {
                             <IconButton color='secondary' className={classes.iconsBG}>
                                 <RemoveIcon />
                             </IconButton>
-                            <Typography variant='h4' component='span' className={classes.productNumber}>
+                            <Typography variant='h5' component='span' className={classes.productNumber}>
                                 2
                             </Typography>
                             <IconButton color='secondary' className={classes.iconsBG}>
@@ -81,7 +82,9 @@ const SingleProduct = () => {
                             </IconButton>
                         </Box>
                         <Box mt={3}>
-                            <Button variant='contained' color='secondary'>add to cart</Button>
+                            <Link to='cart' style={{ textDecoration: 'none' }}>
+                                <Button variant='contained' color='secondary'>add to cart</Button>
+                            </Link>
                         </Box>
                     </Grid>
                 </Grid>
@@ -129,7 +132,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center'
     },
     productNumber: {
-        padding: '0 1rem'
+        padding: '0 .6rem'
     },
     iconsBG: {
         '&:hover': {

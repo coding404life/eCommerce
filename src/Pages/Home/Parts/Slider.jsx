@@ -104,9 +104,9 @@ const useStyles = makeStyles(theme => ({
     },
     boxContainer: {
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'bottom',
         backgroundRepeat: 'no-repeat',
-        height: '70vh'
+        height: '70vh',
     },
     shopBtn: {
         border: `2px solid ${theme.palette.secondary.main}`

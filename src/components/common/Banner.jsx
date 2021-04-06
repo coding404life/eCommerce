@@ -26,7 +26,7 @@ const Banner = () => {
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundImage: `url(${bannerImg})`,
-        height: '35vh',
+        minHeight: '40vh',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'right',

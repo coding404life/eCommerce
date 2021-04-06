@@ -11,7 +11,7 @@ const Shop = () => {
         <Box mb={5}>
             <Banner />
             <Container>
-                <BreadCrumb />
+                <BreadCrumb thisRoute='shop' />
                 <Box mt={4}>
                     <Grid container>
                         <Grid item xs={12} sm={2}>
