@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core';
-import bannerImg from '../../assets/banner.jpg';
+import bannerImg from '../../assets/newsler.jpg';
 
 const Banner = () => {
     const classes = useStyles();
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         minHeight: '40vh',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right',
+        backgroundPosition: 'bottom',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
