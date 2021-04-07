@@ -1,4 +1,4 @@
-import { Box, Button, Divider, IconButton, makeStyles, Slider, Typography } from '@material-ui/core'
+import { Box, Button, Divider, IconButton, makeStyles, Slider, TextField, Typography } from '@material-ui/core'
 import React from 'react'
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import { formatPrice } from '../../../components/common/Helper';
@@ -13,7 +13,14 @@ const Sidebar = () => {
     };
 
     return (
-        <Box mt={3} className={classes.root}>
+        <Box mt={1} className={classes.root}>
+            <Box mb={2}>
+                <TextField
+                    label="Search input"
+                    margin="normal"
+                    variant="outlined"
+                />
+            </Box>
             <Box>
                 <Typography variant='h5'>Categories</Typography>
                 <Button>All</Button>

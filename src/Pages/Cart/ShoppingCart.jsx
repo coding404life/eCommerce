@@ -6,6 +6,7 @@ import { formatPrice } from '../../components/common/Helper';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from 'react-router-dom';
 
 const ShoppingCart = () => {
     const classes = useStyles();
@@ -89,7 +90,10 @@ const ShoppingCart = () => {
                     </Grid>
                     <Divider />
                     <Box my={4} display='flex' justifyContent='space-between'>
-                        <Button variant='contained' color='primary' className={classes.shoppingButtons}>continue shopping</Button>
+                        <Link to='shop' style={{ textDecoration: 'none' }}>
+                            <Button variant='contained' color='primary' className={classes.shoppingButtons}>
+                                continue shopping</Button>
+                        </Link>
                         <Button variant='contained' color='secondary'>clear shopping cart</Button>
                     </Box>
                     <Box my={4}>

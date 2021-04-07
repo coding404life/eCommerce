@@ -1,5 +1,5 @@
 import { AppBar, Toolbar, Typography, Button, IconButton, Box, Container, Badge, Hidden } from '@material-ui/core';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+// import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import MenuOpenOutlinedIcon from '@material-ui/icons/MenuOpenOutlined';
 import useStyles from './Style';
@@ -39,9 +39,9 @@ const Navbar = () => {
                         </Box>
                     </Hidden>
                     <Box>
-                        <IconButton className={classes.IconButton} >
+                        {/* <IconButton className={classes.IconButton} >
                             <SearchOutlinedIcon />
-                        </IconButton>
+                        </IconButton> */}
                         <Link to="cart">
                             <IconButton className={classes.IconButton}>
                                 <Badge badgeContent={6} color="primary">
