@@ -3,26 +3,32 @@ import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { formatPrice } from '../../../../components/common/Helper';
 import { Link } from 'react-router-dom';
-import chairImg from '../../../../assets/products/product-3.png';
+// import chairImg from '../../../../assets/products/product-3.png';
 
-const Product = () => {
+const Product = (props) => {
     const classes = useStyles();
-
+    const title = props.products.title.slice(0, 29)
     return (
-        <Box display='flex' flexDirection='column' px={3} py={3} style={{ transition: 'all 0.3s linear' }} >
+        <Box
+            id={props.products.id}
+            px={3} py={3}
+            display='flex'
+            flexDirection='column'
+            style={{ transition: 'all 0.3s linear' }}
+        >
             <Box className={classes.container}>
                 <div className={classes.overlay + ' overlay'}></div>
-                <img className={classes.imgStyle} src={chairImg} alt="https://picsum.photos/200/300" />
-                <Link className={classes.searchIcon + ' show'} to='SingleProduct'>
+                <img className={classes.imgStyle} src={props.products.image} alt="https://picsum.photos/200/300" />
+                <Link className={classes.searchIcon + ' show'} to={`/products/${props.products.id}`} >
                     <SearchOutlinedIcon />
                 </Link>
             </Box>
             <Box display='flex' justifyContent='space-between' mt={3}>
-                <Typography>Specify chair design</Typography>
+                <Typography>{title}</Typography>
                 <LocalMallOutlinedIcon className={classes.cursor} />
             </Box>
             <Typography variant='h6' color='primary'>
-                <Box fontWeight='700'>{formatPrice(1720)}</Box>
+                <Box fontWeight='700'>{formatPrice(props.products.price)}</Box>
             </Typography>
         </Box>
     )
@@ -31,6 +37,7 @@ const Product = () => {
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
+        // padding: theme.spacing(3),
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -75,6 +82,10 @@ const useStyles = makeStyles(theme => ({
     imgStyle: {
         width: '100%',
         borderRadius: 5,
+        height: '20vmax',
+        [ theme.breakpoints.down('sm') ]: {
+            maxHeight: '25vmax'
+        }
     },
     cursor: {
         cursor: 'pointer'

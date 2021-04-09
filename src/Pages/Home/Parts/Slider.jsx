@@ -6,6 +6,7 @@ import sliderImg1 from '../../../assets/slider-1.jpg'
 import sliderImg2 from '../../../assets/slider-2.jpg'
 import sliderImg3 from '../../../assets/slider-3.jpg'
 import sliderImg4 from '../../../assets/slider-4.jpg'
+import { Link } from 'react-router-dom';
 
 const Item = ({ item }) => {
     const classes = useStyles();
@@ -30,7 +31,9 @@ const Item = ({ item }) => {
                             <Box width='45%' my={1} className={classes.caroselParagraph} >{item.paragraph}</Box>
                         </Typography>
                     </Box>
-                    <Button className={classes.shopBtn} variant="outlined">Shop now</Button>
+                    <Link to='shop' style={{ textDecoration: 'none' }}>
+                        <Button className={classes.shopBtn} variant="outlined">Shop now</Button>
+                    </Link>
                 </Box>
             </Container>
         </Box>

@@ -1,5 +1,5 @@
 import { Box, Button, Container, Divider, Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import BreadCrumb from '../../components/common/BreadCrumb';
 import chairImg from '../../assets/products/product-3.png';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
@@ -10,8 +10,8 @@ import { Link } from 'react-router-dom';
 
 const SingleProduct = () => {
     const classes = useStyles();
+    const [ count, setCount ] = useState(0)
     const arr = [ 'red', 'green', 'purple' ];
-
     return (
         <Box>
             <Container>
@@ -71,13 +71,21 @@ const SingleProduct = () => {
                             </Box>
                         </Box>
                         <Box mt={4}>
-                            <IconButton color='secondary' className={classes.iconsBG}>
+                            <IconButton
+                                color='secondary'
+                                className={classes.iconsBG}
+                                onClick={() => setCount(count - 1)}
+                            >
                                 <RemoveIcon />
                             </IconButton>
                             <Typography variant='h5' component='span' className={classes.productNumber}>
-                                2
+                                {count >= 0 ? count : setCount(0)}
                             </Typography>
-                            <IconButton color='secondary' className={classes.iconsBG}>
+                            <IconButton
+                                color='secondary'
+                                className={classes.iconsBG}
+                                onClick={() => setCount(count + 1)}
+                            >
                                 <AddIcon />
                             </IconButton>
                         </Box>
