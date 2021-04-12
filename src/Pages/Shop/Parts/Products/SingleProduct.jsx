@@ -1,17 +1,30 @@
-import { Box, Button, Container, Divider, Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
+import {
+    Box,
+    Button, Container, Divider,
+    Grid, IconButton,
+    makeStyles, Typography
+} from '@material-ui/core';
 import React, { useState } from 'react';
-import BreadCrumb from '../../components/common/BreadCrumb';
-import chairImg from '../../assets/products/product-3.png';
+import BreadCrumb from '../../../../components/common/BreadCrumb';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { formatPrice } from '../../components/common/Helper'
-import { Link } from 'react-router-dom';
+import { formatPrice } from '../../../../components/common/Helper'
+import { Link, useParams } from 'react-router-dom';
 
-const SingleProduct = () => {
+const SingleProduct = ({ data, isLoading, addItem }) => {
     const classes = useStyles();
     const [ count, setCount ] = useState(0)
-    const arr = [ 'red', 'green', 'purple' ];
+    const arr = [ 'red', 'green', 'purple' ]
+    const { id } = useParams();
+    const product = data[ id.slice(1, id.length) - 1 ]
+
+
+    const currentCard = () => {
+        addItem(product)
+        // console.log(product);
+    }
+
     return (
         <Box>
             <Container>
@@ -19,22 +32,22 @@ const SingleProduct = () => {
                 <Grid container justify='space-between' className={classes.root}>
                     <Grid item sm={6} xs={12} >
                         <Box className={classes.productImgContainer}>
-                            <img src={chairImg} alt="chair" className={classes.productImg} />
+                            <img src={product.image} alt="chair" className={classes.productImg} />
                         </Box>
                         <Box display='flex' my={3} justifyContent='center'>
-                            <img src={chairImg} alt="chair" className={classes.subImg} />
-                            <img src={chairImg} alt="chair" className={classes.subImg} />
-                            <img src={chairImg} alt="chair" className={classes.subImg} />
+                            <img src={product.image} alt="chair" className={classes.subImg} />
+                            <img src={product.image} alt="chair" className={classes.subImg} />
+                            <img src={product.image} alt="chair" className={classes.subImg} />
                         </Box>
                     </Grid>
                     <Grid item sm={6} xs={12}>
                         <Box mb={4}>
                             <Typography variant='h5'>
-                                <Box fontWeight='bold' mb={4}>Spacing chair design</Box>
+                                <Box fontWeight='bold' mb={4}>{product.title}</Box>
                             </Typography>
-                            <Typography varinat='subtitle1' color='textSecondary'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi praesentium quasi maxime unde asperiores ullam quaerat incidunt! Voluptas molestias reiciendis, quos, dolorum voluptatem, minus iusto voluptatibus beatae officia velit eaque?</Typography>
+                            <Typography varinat='subtitle1' color='textSecondary'>{product.description}</Typography>
                             <Typography variant='h6' color='primary'>
-                                <Box fontWeight='bold' mt={1}>{formatPrice(330)}</Box>
+                                <Box fontWeight='bold' mt={1}>{formatPrice(product.price)}</Box>
                             </Typography>
                         </Box>
                         <Box display='flex' mb={4}>
@@ -48,7 +61,7 @@ const SingleProduct = () => {
                             <Box>
                                 <Typography variant='h6' color='textSecondary'>
                                     <Box mb={1} fontWeight='normal'>inStock</Box>
-                                    <Box mb={1} fontWeight='normal'>jewelery</Box>
+                                    <Box mb={1} fontWeight='normal'>{product.category}</Box>
                                     <Box mb={1} fontWeight='normal'>Ikea</Box>
                                 </Typography>
                             </Box>
@@ -91,13 +104,13 @@ const SingleProduct = () => {
                         </Box>
                         <Box mt={3}>
                             <Link to='cart' style={{ textDecoration: 'none' }}>
-                                <Button variant='contained' color='secondary'>add to cart</Button>
+                                <Button variant='contained' color='secondary' onClick={currentCard}>add to cart</Button>
                             </Link>
                         </Box>
                     </Grid>
                 </Grid>
             </Container>
-        </Box>
+        </Box >
     )
 }
 
@@ -115,7 +128,8 @@ const useStyles = makeStyles(theme => ({
         margin: '0 2rem'
     },
     productImg: {
-        maxWidth: '100%'
+        maxWidth: '100%',
+        height: '25vmax'
     },
     subImg: {
         backgroundColor: '#f5f5f5',

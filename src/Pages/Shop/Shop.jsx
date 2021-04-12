@@ -1,13 +1,13 @@
 import { Box, CircularProgress, Container, Grid } from "@material-ui/core"
 import Sidebar from './Parts/Sidebar';
-import Product from './Parts/Products/Product';
+import Products from './Parts/Products/Products';
 import Banner from '../../components/common/Banner';
 import TopBar from "./Parts/TopBar";
 import BreadCrumb from "../../components/common/BreadCrumb";
 import React from "react";
 
 
-const Shop = ({ data, isLoading, error }) => {
+const Shop = ({ data, isLoading, error, addTocartHandler }) => {
     // const results = data.filter(product => product.price < 10);
 
     return (
@@ -29,7 +29,7 @@ const Shop = ({ data, isLoading, error }) => {
                                     </Grid>}
                                     {data.map((products) => (
                                         <Grid item xs={12} sm={4} key={products.id}>
-                                            <Product products={products} isloading={isLoading} error={error} />
+                                            <Products products={products} isloading={isLoading} error={error} addItem={addTocartHandler} />
                                         </Grid>
                                     ))}
                                 </Grid>

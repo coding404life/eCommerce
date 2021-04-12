@@ -3,11 +3,16 @@ import LocalMallOutlinedIcon from '@material-ui/icons/LocalMallOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { formatPrice } from '../../../../components/common/Helper';
 import { Link } from 'react-router-dom';
-// import chairImg from '../../../../assets/products/product-3.png';
 
-const Product = (props) => {
+const Products = (props) => {
     const classes = useStyles();
-    const title = props.products.title.slice(0, 29)
+    const title = props.products.title.slice(0, 29);
+
+    const currentCard = () => {
+        props.addItem(props.products)
+        console.log(props.products);
+    }
+
     return (
         <Box
             id={props.products.id}
@@ -19,13 +24,13 @@ const Product = (props) => {
             <Box className={classes.container}>
                 <div className={classes.overlay + ' overlay'}></div>
                 <img className={classes.imgStyle} src={props.products.image} alt="https://picsum.photos/200/300" />
-                <Link className={classes.searchIcon + ' show'} to={`/products/${props.products.id}`} >
+                <Link className={classes.searchIcon + ' show'} to={`/products:${props.products.id}`} >
                     <SearchOutlinedIcon />
                 </Link>
             </Box>
             <Box display='flex' justifyContent='space-between' mt={3}>
                 <Typography>{title}</Typography>
-                <LocalMallOutlinedIcon className={classes.cursor} />
+                <LocalMallOutlinedIcon className={classes.cursor} onClick={currentCard} />
             </Box>
             <Typography variant='h6' color='primary'>
                 <Box fontWeight='700'>{formatPrice(props.products.price)}</Box>
@@ -92,4 +97,4 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default Product
+export default Products
