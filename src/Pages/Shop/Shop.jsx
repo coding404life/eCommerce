@@ -4,11 +4,12 @@ import Products from './Parts/Products/Products';
 import Banner from '../../components/common/Banner';
 import TopBar from "./Parts/TopBar";
 import BreadCrumb from "../../components/common/BreadCrumb";
-import React from "react";
+import React, { useContext } from "react";
+import AppContext from '../../context/app-context';
 
 
-const Shop = ({ data, isLoading, error, addTocartHandler }) => {
-    // const results = data.filter(product => product.price < 10);
+const Shop = () => {
+    const { data, isLoading, addTocartHandler } = useContext(AppContext);
 
     return (
         <Box mb={5}>
@@ -27,9 +28,9 @@ const Shop = ({ data, isLoading, error, addTocartHandler }) => {
                                     {isLoading && <Grid container justify='center'>
                                         <CircularProgress />
                                     </Grid>}
-                                    {data.map((products) => (
-                                        <Grid item xs={12} sm={4} key={products.id}>
-                                            <Products products={products} isloading={isLoading} error={error} addItem={addTocartHandler} />
+                                    {data.map((product) => (
+                                        <Grid item xs={12} sm={4} key={product.id}>
+                                            <Products data={product} isloading={isLoading} addTocartHandler={addTocartHandler} />
                                         </Grid>
                                     ))}
                                 </Grid>

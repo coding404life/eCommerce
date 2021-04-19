@@ -1,115 +1,111 @@
 import {
     Box,
     Button, Container, Divider,
-    Grid, IconButton,
+    Grid,
     makeStyles, Typography
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import BreadCrumb from '../../../../components/common/BreadCrumb';
-import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
+// import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import { formatPrice } from '../../../../components/common/Helper'
 import { Link, useParams } from 'react-router-dom';
+import AppContext from '../../../../context/app-context';
+import { CircularProgress } from '@material-ui/core';
+import useFetch from '../../../../hooks/useFetch';
+import AmountButton from '../../../../components/common/AmounButton';
 
-const SingleProduct = ({ data, isLoading, addItem }) => {
+
+const SingleProduct = () => {
     const classes = useStyles();
-    const [ count, setCount ] = useState(0)
-    const arr = [ 'red', 'green', 'purple' ]
+    const { addTocart } = useContext(AppContext);
+    const [ itemAmount, setItemAmount ] = useState(1);
     const { id } = useParams();
-    const product = data[ id.slice(1, id.length) - 1 ]
+    const productID = parseInt(id.slice(1, id.length))
+    const { data, isLoading } = useFetch(`https://fakestoreapi.com/products/${productID}`);
 
+    const productData = {
+        ...data,
+        amount: itemAmount,
+        totalPrice: data.price * itemAmount
+    }
 
-    const currentCard = () => {
-        addItem(product)
-        // console.log(product);
+    const addtItem = () => {
+        addTocart(productData);
     }
 
     return (
         <Box>
-            <Container>
-                <BreadCrumb thisRoute='Spacing chair design' />
-                <Grid container justify='space-between' className={classes.root}>
-                    <Grid item sm={6} xs={12} >
-                        <Box className={classes.productImgContainer}>
-                            <img src={product.image} alt="chair" className={classes.productImg} />
-                        </Box>
-                        <Box display='flex' my={3} justifyContent='center'>
-                            <img src={product.image} alt="chair" className={classes.subImg} />
-                            <img src={product.image} alt="chair" className={classes.subImg} />
-                            <img src={product.image} alt="chair" className={classes.subImg} />
-                        </Box>
-                    </Grid>
-                    <Grid item sm={6} xs={12}>
-                        <Box mb={4}>
-                            <Typography variant='h5'>
-                                <Box fontWeight='bold' mb={4}>{product.title}</Box>
-                            </Typography>
-                            <Typography varinat='subtitle1' color='textSecondary'>{product.description}</Typography>
+            {isLoading ? <Grid container justify='center'><CircularProgress /></Grid> :
+                <Container>
+                    <BreadCrumb thisRoute='Spacing chair design' />
+                    <Grid container justify='space-between' className={classes.root}>
+                        <Grid item sm={6} xs={12} >
+                            <Box className={classes.productImgContainer}>
+                                <img src={data.image} alt="chair" className={classes.productImg} />
+                            </Box>
+                            <Box display='flex' my={3} justifyContent='center'>
+                                <img src={data.image} alt="chair" className={classes.subImg} />
+                                <img src={data.image} alt="chair" className={classes.subImg} />
+                                <img src={data.image} alt="chair" className={classes.subImg} />
+                            </Box>
+                        </Grid>
+                        <Grid item sm={6} xs={12}>
+                            <Box mb={4}>
+                                <Typography variant='h5'>
+                                    <Box fontWeight='bold' mb={4}>{data.title}</Box>
+                                </Typography>
+                                <Typography varinat='subtitle1' color='textSecondary'>{data.description}</Typography>
+                                <Typography variant='h6' color='primary'>
+                                    <Box fontWeight='bold' mt={1}>{formatPrice(data.price)}</Box>
+                                </Typography>
+                            </Box>
+                            <Box display='flex' mb={4}>
+                                <Box mr={3}>
+                                    <Typography variant='h6'>
+                                        <Box mb={1}>Available:</Box>
+                                        <Box mb={1}>Category:</Box>
+                                        <Box mb={1}>Brand:</Box>
+                                    </Typography>
+                                </Box>
+                                <Box>
+                                    <Typography variant='h6' color='textSecondary'>
+                                        <Box mb={1} fontWeight='normal'>inStock</Box>
+                                        <Box mb={1} fontWeight='normal'>{data.category}</Box>
+                                        <Box mb={1} fontWeight='normal'>Ikea</Box>
+                                    </Typography>
+                                </Box>
+                            </Box>
+                            <Divider />
+                            {/* <Box display='flex' mt={4} >
+                                <Box mr={3}>
+                                    <Typography variant='h6'>Color: </Typography>
+                                </Box>
+                                <Box className={classes.colorWrapper}>
+                                    {Colors.map((color, index) => {
+                                        return <IconButton
+                                            key={index}
+                                            className={classes.iconButton}
+                                            style={{ backgroundColor: color }}
+                                        >
+                                            <CheckOutlinedIcon className={classes.checkIcon} />
+                                        </IconButton>
+                                    })}
+                                </Box>
+                            </Box> */}
                             <Typography variant='h6' color='primary'>
-                                <Box fontWeight='bold' mt={1}>{formatPrice(product.price)}</Box>
+                                <Box fontWeight='bold' mt={1}>Total Price : {formatPrice(productData.totalPrice)}</Box>
                             </Typography>
-                        </Box>
-                        <Box display='flex' mb={4}>
-                            <Box mr={3}>
-                                <Typography variant='h6'>
-                                    <Box mb={1}>Available:</Box>
-                                    <Box mb={1}>Category:</Box>
-                                    <Box mb={1}>Brand:</Box>
-                                </Typography>
+                            <AmountButton itemAmount={itemAmount} setItemAmount={setItemAmount} />
+
+                            <Box mt={3}>
+                                <Link to='cart' style={{ textDecoration: 'none' }}>
+                                    <Button variant='contained' color='secondary' onClick={addtItem}>add to cart</Button>
+                                </Link>
                             </Box>
-                            <Box>
-                                <Typography variant='h6' color='textSecondary'>
-                                    <Box mb={1} fontWeight='normal'>inStock</Box>
-                                    <Box mb={1} fontWeight='normal'>{product.category}</Box>
-                                    <Box mb={1} fontWeight='normal'>Ikea</Box>
-                                </Typography>
-                            </Box>
-                        </Box>
-                        <Divider />
-                        <Box display='flex' mt={4} >
-                            <Box mr={3}>
-                                <Typography variant='h6'>Color: </Typography>
-                            </Box>
-                            <Box className={classes.colorWrapper}>
-                                {arr.map((color, index) => {
-                                    return <IconButton
-                                        key={index}
-                                        className={classes.iconButton}
-                                        style={{ backgroundColor: color }}
-                                    >
-                                        <CheckOutlinedIcon className={classes.checkIcon} />
-                                    </IconButton>
-                                })}
-                            </Box>
-                        </Box>
-                        <Box mt={4}>
-                            <IconButton
-                                color='secondary'
-                                className={classes.iconsBG}
-                                onClick={() => setCount(count - 1)}
-                            >
-                                <RemoveIcon />
-                            </IconButton>
-                            <Typography variant='h5' component='span' className={classes.productNumber}>
-                                {count >= 0 ? count : setCount(0)}
-                            </Typography>
-                            <IconButton
-                                color='secondary'
-                                className={classes.iconsBG}
-                                onClick={() => setCount(count + 1)}
-                            >
-                                <AddIcon />
-                            </IconButton>
-                        </Box>
-                        <Box mt={3}>
-                            <Link to='cart' style={{ textDecoration: 'none' }}>
-                                <Button variant='contained' color='secondary' onClick={currentCard}>add to cart</Button>
-                            </Link>
-                        </Box>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Container>
+                </Container>
+            }
         </Box >
     )
 }

@@ -4,10 +4,12 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import MenuOpenOutlinedIcon from '@material-ui/icons/MenuOpenOutlined';
 import useStyles from './Style';
 import { Link } from 'react-router-dom';
-
+import AppContext from '../../context/app-context';
+import { useContext } from 'react';
 
 const Navbar = () => {
     const classes = useStyles();
+    const { cart } = useContext(AppContext);
 
     return (
         <AppBar position="static" className={classes.root}>
@@ -44,7 +46,7 @@ const Navbar = () => {
                         </IconButton> */}
                         <Link to="cart">
                             <IconButton className={classes.IconButton}>
-                                <Badge badgeContent={6} color="primary">
+                                <Badge badgeContent={cart.length} color="primary">
                                     <ShoppingCartOutlinedIcon />
                                 </Badge>
                             </IconButton>

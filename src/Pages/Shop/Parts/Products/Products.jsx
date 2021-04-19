@@ -4,18 +4,18 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { formatPrice } from '../../../../components/common/Helper';
 import { Link } from 'react-router-dom';
 
-const Products = (props) => {
+const Products = ({ data, isLoading, addTocartHandler }) => {
     const classes = useStyles();
-    const title = props.products.title.slice(0, 29);
+    const title = data.title.slice(0, 29);
 
     const currentCard = () => {
-        props.addItem(props.products)
-        console.log(props.products);
+        addTocartHandler(data)
+        // console.log(data);
     }
 
     return (
         <Box
-            id={props.products.id}
+            id={data.id}
             px={3} py={3}
             display='flex'
             flexDirection='column'
@@ -23,8 +23,8 @@ const Products = (props) => {
         >
             <Box className={classes.container}>
                 <div className={classes.overlay + ' overlay'}></div>
-                <img className={classes.imgStyle} src={props.products.image} alt="https://picsum.photos/200/300" />
-                <Link className={classes.searchIcon + ' show'} to={`/products:${props.products.id}`} >
+                <img className={classes.imgStyle} src={data.image} alt="https://picsum.photos/200/300" />
+                <Link className={classes.searchIcon + ' show'} to={`/products:${data.id}`} >
                     <SearchOutlinedIcon />
                 </Link>
             </Box>
@@ -33,7 +33,7 @@ const Products = (props) => {
                 <LocalMallOutlinedIcon className={classes.cursor} onClick={currentCard} />
             </Box>
             <Typography variant='h6' color='primary'>
-                <Box fontWeight='700'>{formatPrice(props.products.price)}</Box>
+                <Box fontWeight='700'>{formatPrice(data.price)}</Box>
             </Typography>
         </Box>
     )
@@ -42,7 +42,6 @@ const Products = (props) => {
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
-        // padding: theme.spacing(3),
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',

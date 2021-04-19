@@ -1,13 +1,15 @@
 import { Box, Button, Container, Divider, Grid, Hidden, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useContext } from 'react';
 import BreadCrumb from '../../components/common/BreadCrumb';
 import { formatPrice } from '../../components/common/Helper';
-
 import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
+import AppContext from '../../context/app-context';
 
-const ShoppingCart = ({ cartItemsList, clearListHandler }) => {
+const ShoppingCart = () => {
     const classes = useStyles();
+    const { cart, removeItemFromCart, clearListHandler } = useContext(AppContext);
+
 
     return (
         <Container>
@@ -39,7 +41,7 @@ const ShoppingCart = ({ cartItemsList, clearListHandler }) => {
                     <Divider />
                 </Hidden>
                 <Box my={3}>
-                    <CartItem cartItemsList={cartItemsList} />
+                    {cart.map(cur => <CartItem key={cur.id} item={cur} removeItem={removeItemFromCart} />)}
 
                     <Divider />
                     <Box my={4} display='flex' justifyContent='space-between'>

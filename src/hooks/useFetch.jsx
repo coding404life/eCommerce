@@ -4,7 +4,7 @@ import axios from 'axios';
 const useFetch = (url) => {
     const [ data, setData ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(true);
-    const [ error, setError ] = useState(null);
+    // const [ error, setError ] = useState(null);
 
     //fetch some data
     useEffect(() => {
@@ -14,19 +14,18 @@ const useFetch = (url) => {
                 if (!isRendered) {
                     setData(res.data);
                     setIsLoading(false);
-                    setError(null)
-                    console.log(res.data);
+                    // setError(null)
                 }
             }).catch(err => {
                 setIsLoading(false);
-                setError(err.message)
+                // setError(err.message)
             })
         return () => {
             isRendered = true;
         }
     }, [ url ]);
 
-    return { data, isLoading, error }
+    return { data, isLoading }
 }
 
 export default useFetch;

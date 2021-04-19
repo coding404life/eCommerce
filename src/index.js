@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './Container/App';
+import AppStateProvider from './context/AppState';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppStateProvider>
+      <App />
+    </AppStateProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
