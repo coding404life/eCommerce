@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './Container/App';
-import AppStateProvider from './context/AppState';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./Container/App";
+import AppStateProvider from "./shared/context/AppState";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -9,6 +9,5 @@ ReactDOM.render(
       <App />
     </AppStateProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
