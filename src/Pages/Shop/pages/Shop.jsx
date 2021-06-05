@@ -4,10 +4,10 @@ import Products from "../components/Products";
 import { Banner, BreadCrumb } from "../../../shared";
 import TopBar from "../components/TopBar";
 import React, { useContext } from "react";
-import AppContext from "../../../shared/context/AppState";
+import AppContext from "../../../shared/context/app-context";
 
 const Shop = () => {
-  const { data, isLoading, addTocartHandler } = useContext(AppContext);
+  const { data, isLoading, addTocart } = useContext(AppContext);
 
   return (
     <Box mb={5}>
@@ -33,7 +33,7 @@ const Shop = () => {
                       <Products
                         data={product}
                         isloading={isLoading}
-                        addTocartHandler={addTocartHandler}
+                        addTocartHandler={addTocart}
                       />
                     </Grid>
                   ))}
