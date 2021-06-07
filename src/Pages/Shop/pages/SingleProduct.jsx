@@ -31,7 +31,7 @@ const SingleProduct = () => {
     totalPrice: data.price * itemAmount,
   };
 
-  const addtItem = () => {
+  const addtItemHandler = () => {
     addTocart(productData);
   };
 
@@ -129,7 +129,7 @@ const SingleProduct = () => {
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={addtItem}
+                    onClick={addtItemHandler}
                   >
                     add to cart
                   </Button>

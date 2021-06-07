@@ -2,17 +2,23 @@ import { Box, Grid, Hidden, makeStyles, Typography } from "@material-ui/core";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { AmounButton } from "../../../shared";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const CartItem = ({ item, removeItem }) => {
-  const classes = useStyles();
+const CartItem = (item, removeItemHandler, editCartHandler) => {
   const [itemAmount, setItemAmount] = useState(item.amount);
+
+  const classes = useStyles();
 
   const product = {
     ...item,
     amount: itemAmount,
     totalPrice: item.price * itemAmount,
   };
+
+  useEffect(() => {
+    editCartHandler(product);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemAmount]);
 
   return (
     <Grid container justify="space-between" alignItems="center">
@@ -59,7 +65,7 @@ const CartItem = ({ item, removeItem }) => {
         </Hidden>
         <DeleteIcon
           className={classes.closeIcon}
-          onClick={() => removeItem(product.id)}
+          onClick={() => removeItemHandler(product.id)}
         />
       </Grid>
     </Grid>

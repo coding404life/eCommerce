@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useCallback } from "react";
 import useFetch from "../hooks/useFetch";
 import AppContext from "./app-context";
 import cartReducer from "./app-reducer";
@@ -17,36 +17,39 @@ const AppStateProvider = (props) => {
     cart: [],
     totalPrice: 0,
   };
+
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  console.log(state.cart);
 
   //adding items to the cart item
-  const addTocart = (item) => {
+  const addTocart = useCallback((item) => {
     dispatch({
       type: ADD_ITEM_TO_CART,
       payload: item,
     });
-  };
+  }, []);
+
   //clear the cart item
-  const clearListHandler = () => {
+  const clearListHandler = useCallback(() => {
     dispatch({
       type: CLEAR_CART_FROM_ITEMS,
       payload: [],
     });
-  };
+  }, []);
   //remove item from the cart
-  const removeItemFromCart = (itemID) => {
+  const removeItemFromCart = useCallback((itemID) => {
     dispatch({
       type: REMOVE_ITEM_FROM_CART,
       payload: itemID,
     });
-  };
+  }, []);
   // edit the whole cart with new one
-  const editCart = (newCart) => {
+  const editCart = useCallback((newCart) => {
     dispatch({
       type: EDIT_ITEM_CART,
       payload: newCart,
     });
-  };
+  }, []);
 
   return (
     <AppContext.Provider

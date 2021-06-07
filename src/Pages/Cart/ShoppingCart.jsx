@@ -17,7 +17,8 @@ import AppContext from "../../shared/context/app-context";
 
 const ShoppingCart = () => {
   const classes = useStyles();
-  const { cart, removeItemFromCart, clearListHandler } = useContext(AppContext);
+  const { cart, removeItemFromCart, clearListHandler, editCart } =
+    useContext(AppContext);
 
   return (
     <Container>
@@ -49,10 +50,16 @@ const ShoppingCart = () => {
           <Divider />
         </Hidden>
         <Box my={3}>
+          {/*start loop throught cart array */}
           {cart.map((cur) => (
-            <CartItem key={cur.id} item={cur} removeItem={removeItemFromCart} />
+            <CartItem
+              key={cur.id}
+              item={cur}
+              removeItemHandler={removeItemFromCart}
+              editCartHandler={editCart}
+            />
           ))}
-
+          {/*end loop throught cart array */}
           <Divider />
           <Box my={4} display="flex" justifyContent="space-between">
             <Link to="shop" style={{ textDecoration: "none" }}>

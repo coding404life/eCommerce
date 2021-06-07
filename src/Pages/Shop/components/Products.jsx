@@ -1,16 +1,14 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
+// import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { Link } from "react-router-dom";
+import React from "react";
 
-const Products = ({ data, addTocartHandler }) => {
+const Products = (props) => {
+  const { data } = props;
   const classes = useStyles();
   const title = data.title.slice(0, 29);
-
-  const currentCard = () => {
-    addTocartHandler(data);
-  };
 
   return (
     <Box
@@ -37,10 +35,10 @@ const Products = ({ data, addTocartHandler }) => {
       </Box>
       <Box display="flex" justifyContent="space-between" mt={3}>
         <Typography>{title}</Typography>
-        <LocalMallOutlinedIcon
+        {/* <LocalMallOutlinedIcon
           className={classes.cursor}
-          onClick={currentCard}
-        />
+          onClick={() => addTocartHandler(data)}
+        /> */}
       </Box>
       <Typography variant="h6" color="primary">
         <Box fontWeight="700">{formatPrice(data.price)}</Box>

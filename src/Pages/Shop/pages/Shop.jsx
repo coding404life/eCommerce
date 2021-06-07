@@ -28,6 +28,7 @@ const Shop = () => {
                       <CircularProgress />
                     </Grid>
                   )}
+                  {/* Start loop throught items from API */}
                   {data.map((product) => (
                     <Grid item xs={12} sm={4} key={product.id}>
                       <Products
@@ -37,6 +38,7 @@ const Shop = () => {
                       />
                     </Grid>
                   ))}
+                  {/* End loop throught items from API */}
                 </Grid>
               </Box>
             </Grid>
@@ -47,4 +49,4 @@ const Shop = () => {
   );
 };
 
-export default React.memo(Shop);
+export default Shop;

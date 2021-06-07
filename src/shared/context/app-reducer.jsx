@@ -8,36 +8,52 @@ import {
 const cartReducer = (state, action) => {
   switch (action.type) {
     case ADD_ITEM_TO_CART:
-      const { id, amount } = action.payload;
-      const itemCart = state.cart.filter((item) => item.id === id);
+      const product = action.payload;
 
-      if (itemCart.length > 0) {
+      const itemCart = state.cart.find((item) => item.id === product.id);
+
+      if (itemCart) {
         const newItem = {
-          ...itemCart[0],
-          amount: itemCart[0].amount + amount,
+          ...itemCart,
+          amount: itemCart.amount + product.amount,
         };
-        state.cart[state.cart.findIndex((el) => el.id === id)] = newItem;
+        const itemIndex = state.cart.findIndex((el) => el.id === product.id);
+        state.cart[itemIndex] = newItem;
+
+        console.log("dispatched");
         return {
-          cart: state.cart.filter((item) => item.id !== action.payload),
+          cart: state.cart,
         };
       }
+
       return {
         cart: [...state.cart, action.payload],
       };
+
     case REMOVE_ITEM_FROM_CART:
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
+
     case CLEAR_CART_FROM_ITEMS:
       return {
         ...state,
         cart: action.payload,
       };
+
     case EDIT_ITEM_CART:
+      const changedProductAmount = action.payload;
+
+      const itemIndex = state.cart.findIndex(
+        (el) => el.id === changedProductAmount.id
+      );
+      state.cart[itemIndex] = changedProductAmount;
+
       return {
-        cart: [...action.payload],
+        cart: state.cart,
       };
+
     default:
       return state;
   }
