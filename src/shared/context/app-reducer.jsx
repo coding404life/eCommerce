@@ -20,7 +20,6 @@ const cartReducer = (state, action) => {
         const itemIndex = state.cart.findIndex((el) => el.id === product.id);
         state.cart[itemIndex] = newItem;
 
-        console.log("dispatched");
         return {
           cart: state.cart,
         };

@@ -29,22 +29,18 @@ const Sidebar = () => {
       <Box>
         <Typography variant="h5">Categories</Typography>
         <Button>All</Button>
-        <Button>Office</Button>
-        <Button>Living Room</Button>
-        <Button>Kitichen</Button>
-        <Button>Bedroom</Button>
-        <Button>Dining</Button>
-        <Button>Kids</Button>
+        <Button>men's clothing</Button>
+        <Button>jewelery</Button>
+        <Button>electronics</Button>
+        <Button>women's clothing</Button>
       </Box>
       <Divider />
       <Box my={3}>
         <Typography variant="h5">Company</Typography>
-        <Button>ikea</Button>
-        <Button>Marcos</Button>
-        <Button>Liddy</Button>
-        <Button>Caressa</Button>
-        <Button>Chanel</Button>
-        <Button>Gucci</Button>
+        <Button>Opna Women's</Button>
+        <Button>Radio Shack</Button>
+        <Button>Town Team</Button>
+        <Button>Riven</Button>
       </Box>
       <Divider />
       <Box my={3}>

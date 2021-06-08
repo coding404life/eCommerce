@@ -25,6 +25,8 @@ const SingleProduct = () => {
     `https://fakestoreapi.com/products/${productID}`
   );
 
+  console.log(data);
+
   const productData = {
     ...data,
     amount: itemAmount,
@@ -98,22 +100,7 @@ const SingleProduct = () => {
                 </Box>
               </Box>
               <Divider />
-              {/* <Box display='flex' mt={4} >
-                                <Box mr={3}>
-                                    <Typography variant='h6'>Color: </Typography>
-                                </Box>
-                                <Box className={classes.colorWrapper}>
-                                    {Colors.map((color, index) => {
-                                        return <IconButton
-                                            key={index}
-                                            className={classes.iconButton}
-                                            style={{ backgroundColor: color }}
-                                        >
-                                            <CheckOutlinedIcon className={classes.checkIcon} />
-                                        </IconButton>
-                                    })}
-                                </Box>
-                            </Box> */}
+
               <Typography variant="h6" color="primary">
                 <Box fontWeight="bold" mt={1}>
                   Total Price : {formatPrice(productData.totalPrice)}

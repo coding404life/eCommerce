@@ -17,8 +17,14 @@ import AppContext from "../../shared/context/app-context";
 
 const ShoppingCart = () => {
   const classes = useStyles();
+
   const { cart, removeItemFromCart, clearListHandler, editCart } =
     useContext(AppContext);
+
+  // [219.9, 223, 559.9, 31.98]
+  let totalCost = 0;
+  const shipping = 10;
+  cart.forEach((item) => (totalCost += item.totalPrice));
 
   return (
     <Container>
@@ -92,7 +98,9 @@ const ShoppingCart = () => {
                     mt={3}
                   >
                     <Typography variant="h6">Cart subtotal</Typography>
-                    <Typography variant="h6">{formatPrice(350)}</Typography>
+                    <Typography variant="h6">
+                      {formatPrice(totalCost)}
+                    </Typography>
                   </Box>
                   <Divider />
                   <Box
@@ -102,7 +110,9 @@ const ShoppingCart = () => {
                     mt={3}
                   >
                     <Typography variant="h6">Shipping and handling</Typography>
-                    <Typography variant="h6">{formatPrice(10)}</Typography>
+                    <Typography variant="h6">
+                      {formatPrice(shipping)}
+                    </Typography>
                   </Box>
                   <Divider />
                   <Box
@@ -113,7 +123,7 @@ const ShoppingCart = () => {
                   >
                     <Typography variant="h6">Cart Totals</Typography>
                     <Typography variant="h6" color="primary">
-                      {formatPrice(360)}
+                      {formatPrice(totalCost + shipping)}
                     </Typography>
                   </Box>
                   <Divider />

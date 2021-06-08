@@ -15,7 +15,6 @@ const AppStateProvider = (props) => {
 
   const initialState = {
     cart: [],
-    totalPrice: 0,
   };
 
   const [state, dispatch] = useReducer(cartReducer, initialState);
@@ -36,6 +35,7 @@ const AppStateProvider = (props) => {
       payload: [],
     });
   }, []);
+
   //remove item from the cart
   const removeItemFromCart = useCallback((itemID) => {
     dispatch({
@@ -43,6 +43,7 @@ const AppStateProvider = (props) => {
       payload: itemID,
     });
   }, []);
+
   // edit the whole cart with new one
   const editCart = useCallback((newCart) => {
     dispatch({
@@ -60,7 +61,6 @@ const AppStateProvider = (props) => {
         addTocart,
         removeItemFromCart,
         clearListHandler,
-        totalPrice: state.totalPrice,
         editCart,
       }}
     >

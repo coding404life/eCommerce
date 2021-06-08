@@ -4,7 +4,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { AmounButton } from "../../../shared";
 import { useEffect, useState } from "react";
 
-const CartItem = (item, removeItemHandler, editCartHandler) => {
+const CartItem = ({ item, removeItemHandler, editCartHandler }) => {
   const [itemAmount, setItemAmount] = useState(item.amount);
 
   const classes = useStyles();
