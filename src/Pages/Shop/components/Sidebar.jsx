@@ -4,6 +4,8 @@ import {
   Divider,
   IconButton,
   makeStyles,
+  Menu,
+  MenuItem,
   Slider,
   TextField,
   Typography,
@@ -11,20 +13,36 @@ import {
 import React from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import { formatPrice } from "../../../shared/util/formatPrice";
+import { useFilterContext } from "../../../shared/context/FilterContext";
+const arr = ["red", "green", "purple", "deeppink", "orange"];
 
 const Sidebar = () => {
   const classes = useStyles();
+  const { filterInput } = useFilterContext();
   const [value, setValue] = React.useState([0, 5000]);
-  const arr = ["red", "green", "purple", "deeppink", "orange"];
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleSliderChange = (event, newValue) => {
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSliderChange = (newValue) => {
     setValue(newValue);
   };
 
   return (
     <Box mt={1} className={classes.root}>
-      <Box mb={2}>
-        <TextField label="Search input" margin="normal" variant="outlined" />
+      <Box>
+        <TextField
+          label="Search input"
+          margin="normal"
+          variant="outlined"
+          onChange={(e) => filterInput(e.target.value)}
+        />
       </Box>
       <Box>
         <Typography variant="h5">Categories</Typography>
@@ -35,18 +53,33 @@ const Sidebar = () => {
         <Button>women's clothing</Button>
       </Box>
       <Divider />
-      <Box my={3}>
+      <Box my={1}>
         <Typography variant="h5">Company</Typography>
-        <Button>Opna Women's</Button>
-        <Button>Radio Shack</Button>
-        <Button>Town Team</Button>
-        <Button>Riven</Button>
+        <Button
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          All
+        </Button>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Marcos</MenuItem>
+          <MenuItem onClick={handleClose}>Liddy</MenuItem>
+          <MenuItem onClick={handleClose}>Ikea</MenuItem>
+          <MenuItem onClick={handleClose}>Caressa</MenuItem>
+        </Menu>
       </Box>
       <Divider />
-      <Box my={3}>
+      <Box my={1}>
         <Typography variant="h5">Colors</Typography>
         <Box className={classes.colorWrapper}>
-          <Button>All</Button>
+          <IconButton className={classes.allBtn}>ALL</IconButton>
           {arr.map((color, index) => {
             return (
               <IconButton
@@ -61,9 +94,9 @@ const Sidebar = () => {
         </Box>
       </Box>
       <Divider />
-      <Box mt={3}>
+      <Box mt={1}>
         <Typography variant="h5">Price</Typography>
-        <Box my={2}>
+        <Box mb={1}>
           <Typography id="range-slider" gutterBottom>
             Select Price Range:
           </Typography>
@@ -96,9 +129,10 @@ const useStyles = makeStyles((theme) => ({
       textAlign: "left",
       display: "block",
     },
+    position: "sticky",
+    top: 0,
   },
   iconButton: {
-    backgroundColor: "#f00",
     width: "1rem",
     height: "1rem",
     marginRight: ".3rem",
@@ -107,6 +141,10 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: ".5rem",
     },
   },
+  allBtn: {
+    width: "4vmax",
+    fontSize: "1.2rem",
+  },
   checkIcon: {
     color: "#fff",
     fontSize: "1rem",
@@ -114,10 +152,6 @@ const useStyles = makeStyles((theme) => ({
   colorWrapper: {
     display: "flex",
     alignItems: "center",
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      alignItems: "left",
-    },
   },
 }));
 

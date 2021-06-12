@@ -7,25 +7,23 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { Link, useParams } from "react-router-dom";
-import AppContext from "../../../shared/context/app-context";
+import { useProductContextProvider } from "../../../shared/context/ProductContext";
 import { CircularProgress } from "@material-ui/core";
 import useFetch from "../../../shared/hooks/useFetch";
 import { AmounButton, BreadCrumb } from "../../../shared";
 
 const SingleProduct = () => {
   const classes = useStyles();
-  const { addTocart } = useContext(AppContext);
+  const { addTocart } = useProductContextProvider();
   const [itemAmount, setItemAmount] = useState(1);
   const { id } = useParams();
-  const productID = parseInt(id.slice(1, id.length));
+  const productID = id.slice(1, id.length);
   const { data, isLoading } = useFetch(
-    `https://fakestoreapi.com/products/${productID}`
+    `https://course-api.com/react-store-single-product?id=${productID}`
   );
-
-  console.log(data);
 
   const productData = {
     ...data,
@@ -50,22 +48,39 @@ const SingleProduct = () => {
             <Grid item sm={6} xs={12}>
               <Box className={classes.productImgContainer}>
                 <img
-                  src={data.image}
+                  src={data.images[0].url}
                   alt="chair"
                   className={classes.productImg}
                 />
               </Box>
               <Box display="flex" my={3} justifyContent="center">
-                <img src={data.image} alt="chair" className={classes.subImg} />
-                <img src={data.image} alt="chair" className={classes.subImg} />
-                <img src={data.image} alt="chair" className={classes.subImg} />
+                <img
+                  src={data.images[1].url}
+                  alt="chair"
+                  className={classes.subImg}
+                />
+                <img
+                  src={data.images[2].url}
+                  alt="chair"
+                  className={classes.subImg}
+                />
+                <img
+                  src={data.images[3].url}
+                  alt="chair"
+                  className={classes.subImg}
+                />
+                <img
+                  src={data.images[4].url}
+                  alt="chair"
+                  className={classes.subImg}
+                />
               </Box>
             </Grid>
             <Grid item sm={6} xs={12}>
               <Box mb={4}>
                 <Typography variant="h5">
                   <Box fontWeight="bold" mb={4}>
-                    {data.title}
+                    {data.name}
                   </Box>
                 </Typography>
                 <Typography varinat="subtitle1" color="textSecondary">
@@ -149,8 +164,8 @@ const useStyles = makeStyles((theme) => ({
   },
   subImg: {
     backgroundColor: "#f5f5f5",
-    width: "10vmax",
-    height: "10vmax",
+    width: "8vmax",
+    height: "8vmax",
     margin: `0 1rem`,
   },
   iconButton: {

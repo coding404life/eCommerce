@@ -14,12 +14,11 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import MenuOpenOutlinedIcon from "@material-ui/icons/MenuOpenOutlined";
 import useStyles from "./Style";
 import { Link } from "react-router-dom";
-import AppContext from "../../context/app-context";
-import { useContext } from "react";
+import { useProductContextProvider } from "../../context/ProductContext";
 
 const Navbar = () => {
   const classes = useStyles();
-  const { cart } = useContext(AppContext);
+  const { cart } = useProductContextProvider();
 
   return (
     <AppBar position="static" className={classes.root}>

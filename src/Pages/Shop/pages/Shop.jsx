@@ -1,13 +1,14 @@
-import { Box, CircularProgress, Container, Grid } from "@material-ui/core";
 import Sidebar from "../components/Sidebar";
 import Products from "../components/Products";
-import { Banner, BreadCrumb } from "../../../shared";
 import TopBar from "../components/TopBar";
-import React, { useContext } from "react";
-import AppContext from "../../../shared/context/app-context";
+import { Box, CircularProgress, Container, Grid } from "@material-ui/core";
+import { Banner, BreadCrumb } from "../../../shared";
+import { useProductContextProvider } from "../../../shared/context/ProductContext";
+import { useFilterContext } from "../../../shared/context/FilterContext";
 
 const Shop = () => {
-  const { data, isLoading, addTocart } = useContext(AppContext);
+  const { addTocart } = useProductContextProvider();
+  const { data, isLoading } = useFilterContext();
 
   return (
     <Box mb={5}>

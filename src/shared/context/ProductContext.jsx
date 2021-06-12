@@ -1,24 +1,23 @@
-import React, { useReducer, useCallback } from "react";
-import useFetch from "../hooks/useFetch";
-import AppContext from "./app-context";
-import cartReducer from "./app-reducer";
+import React, {
+  useContext,
+  useReducer,
+  useCallback,
+  createContext,
+} from "react";
+import cartReducer from "./reducers/product_reducer";
+
 import {
   EDIT_ITEM_CART,
   ADD_ITEM_TO_CART,
   REMOVE_ITEM_FROM_CART,
   CLEAR_CART_FROM_ITEMS,
-} from "./app-action";
+} from "./actions";
 
-const AppStateProvider = (props) => {
-  //share functions and state logic from here
-  const { data, isLoading } = useFetch("https://fakestoreapi.com/products");
+const ProductContext = createContext();
 
-  const initialState = {
-    cart: [],
-  };
-
-  const [state, dispatch] = useReducer(cartReducer, initialState);
-  console.log(state.cart);
+export const ProductProvider = (props) => {
+  const [state, dispatch] = useReducer(cartReducer, { cart: [] });
+  // console.log(state.cart);
 
   //adding items to the cart item
   const addTocart = useCallback((item) => {
@@ -53,10 +52,8 @@ const AppStateProvider = (props) => {
   }, []);
 
   return (
-    <AppContext.Provider
+    <ProductContext.Provider
       value={{
-        data,
-        isLoading,
         cart: state.cart,
         addTocart,
         removeItemFromCart,
@@ -65,8 +62,10 @@ const AppStateProvider = (props) => {
       }}
     >
       {props.children}
-    </AppContext.Provider>
+    </ProductContext.Provider>
   );
 };
 
-export default AppStateProvider;
+export const useProductContextProvider = () => {
+  return useContext(ProductContext);
+};

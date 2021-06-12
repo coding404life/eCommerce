@@ -8,18 +8,17 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import React, { useContext } from "react";
 import { BreadCrumb } from "../../shared";
 import { formatPrice } from "../../shared/util/formatPrice";
 import { Link } from "react-router-dom";
 import CartItem from "./components/CartItem";
-import AppContext from "../../shared/context/app-context";
+import { useProductContextProvider } from "../../shared/context/ProductContext";
 
 const ShoppingCart = () => {
   const classes = useStyles();
 
   const { cart, removeItemFromCart, clearListHandler, editCart } =
-    useContext(AppContext);
+    useProductContextProvider();
 
   // [219.9, 223, 559.9, 31.98]
   let totalCost = 0;

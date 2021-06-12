@@ -26,12 +26,12 @@ const CartItem = ({ item, removeItemHandler, editCartHandler }) => {
         <Grid item sm={1} md={2}>
           <img
             className={classes.productImage}
-            src={product.image}
+            src={product.images[0].url}
             alt="product"
           />
         </Grid>
         <Grid item sm={3} md={2}>
-          <Typography variant="subtitle1">{product.title}</Typography>
+          <Typography variant="subtitle1">{product.name}</Typography>
         </Grid>
         <Grid item sm={2}>
           <Typography variant="subtitle1" color="primary">
@@ -47,7 +47,7 @@ const CartItem = ({ item, removeItemHandler, editCartHandler }) => {
             alt="product"
           />
           <Box>
-            <Typography variant="subtitle1">{product.title}</Typography>
+            <Typography variant="subtitle1">{product.name}</Typography>
             <Typography variant="subtitle1" color="primary">
               <Box fontWeight="bold">{formatPrice(product.price)}</Box>
             </Typography>

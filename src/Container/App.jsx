@@ -7,12 +7,14 @@ import {
 } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ScrollToTop from "../shared/util/ScrollToTop";
 
 const App = () => {
   const classes = useStyles();
 
   return (
     <Router>
+      <ScrollToTop />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Navbar />

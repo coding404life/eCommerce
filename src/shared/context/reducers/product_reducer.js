@@ -3,7 +3,7 @@ import {
   REMOVE_ITEM_FROM_CART,
   CLEAR_CART_FROM_ITEMS,
   EDIT_ITEM_CART,
-} from "./app-action";
+} from "../actions";
 
 const cartReducer = (state, action) => {
   switch (action.type) {

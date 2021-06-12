@@ -1,14 +1,13 @@
-import { Box, makeStyles, Typography } from "@material-ui/core";
-// import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
+import React from "react";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { Link } from "react-router-dom";
-import React from "react";
 
 const Products = (props) => {
   const { data } = props;
   const classes = useStyles();
-  const title = data.title.slice(0, 29);
+  const title = data.name.slice(0, 29);
 
   return (
     <Box

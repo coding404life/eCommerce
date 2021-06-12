@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { unstable_batchedUpdates } from "react-dom";
 import axios from "axios";
 
 const useFetch = (url) => {
@@ -9,19 +10,24 @@ const useFetch = (url) => {
   //fetch some data
   useEffect(() => {
     let isRendered = false;
-    axios
-      .get(url)
-      .then((res) => {
+
+    const fetchMyApi = async () => {
+      try {
+        const response = await axios.get(url);
         if (!isRendered) {
-          setData(res.data);
-          setIsLoading(false);
-          setError(null);
+          unstable_batchedUpdates(() => {
+            setData(response.data);
+            setIsLoading(false);
+            setError(null);
+          });
         }
-      })
-      .catch((err) => {
+      } catch (error) {
         setIsLoading(false);
-        setError(err.message);
-      });
+        setError(error.message);
+      }
+    };
+
+    fetchMyApi();
     return () => {
       isRendered = true;
     };
