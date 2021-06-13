@@ -4,30 +4,37 @@ import {
   Divider,
   IconButton,
   makeStyles,
-  Menu,
   MenuItem,
   Slider,
   TextField,
   Typography,
+  InputLabel,
+  Select,
 } from "@material-ui/core";
 import React from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { useFilterContext } from "../../../shared/context/FilterContext";
+import { FormControl } from "@material-ui/core";
 const arr = ["red", "green", "purple", "deeppink", "orange"];
 
 const Sidebar = () => {
   const classes = useStyles();
   const { filterInput } = useFilterContext();
   const [value, setValue] = React.useState([0, 5000]);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [age, setAge] = React.useState("");
+  const [open, setOpen] = React.useState(false);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleChange = (event) => {
+    setAge(event.target.value);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   const handleSliderChange = (newValue) => {
@@ -55,25 +62,26 @@ const Sidebar = () => {
       <Divider />
       <Box my={1}>
         <Typography variant="h5">Company</Typography>
-        <Button
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          All
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Marcos</MenuItem>
-          <MenuItem onClick={handleClose}>Liddy</MenuItem>
-          <MenuItem onClick={handleClose}>Ikea</MenuItem>
-          <MenuItem onClick={handleClose}>Caressa</MenuItem>
-        </Menu>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-controlled-open-select-label">
+            Company
+          </InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={age}
+            onChange={handleChange}
+          >
+            <MenuItem value="ALL">ALL</MenuItem>
+            <MenuItem value="Marcos">Marcos</MenuItem>
+            <MenuItem value="Liddy">Liddy</MenuItem>
+            <MenuItem value="Ikea">Ikea</MenuItem>
+            <MenuItem value="Caressa">Caressa</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
       <Divider />
       <Box my={1}>
@@ -131,6 +139,10 @@ const useStyles = makeStyles((theme) => ({
     },
     position: "sticky",
     top: 0,
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
   },
   iconButton: {
     width: "1rem",

@@ -6,13 +6,10 @@ const filterReducer = (state, action) => {
   switch (action.type) {
     case FILTER_INPUT:
       return {
-        ...state,
-        filteredData: state.Data.filter(
-          (product) => product === action.payload
-        ),
+        inputText: action.payload,
       };
     default:
-      return state;
+      throw new Error();
   }
 };
 

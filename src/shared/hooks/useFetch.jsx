@@ -10,7 +10,6 @@ const useFetch = (url) => {
   //fetch some data
   useEffect(() => {
     let isRendered = false;
-
     const fetchMyApi = async () => {
       try {
         const response = await axios.get(url);

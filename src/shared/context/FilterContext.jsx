@@ -1,6 +1,6 @@
 import useFetch from "../hooks/useFetch";
 import filterReducer from "./reducers/filter_reducer";
-import { useContext, useReducer, createContext, useCallback } from "react";
+import { useContext, useReducer, createContext } from "react";
 import { FILTER_INPUT } from "./actions";
 const FilterContext = createContext();
 
@@ -12,23 +12,26 @@ export const FilterProvider = ({ children }) => {
 
   //2.reducer function
   const [state, dispatch] = useReducer(filterReducer, {
-    Data: data,
+    inputText: "",
     filteredData: [],
   });
 
   //3. filter data from input filed
-  console.log(state.Data);
+  const newArr = data.filter((product) =>
+    product.name.includes(state.inputText)
+  );
+  console.log(newArr);
 
   //4. function to get the input data
-  const filterInput = useCallback((inputData) => {
+  const filterInput = (inputData) => {
     dispatch({
       type: FILTER_INPUT,
       payload: inputData,
     });
-  }, []);
+  };
 
   return (
-    <FilterContext.Provider value={{ data, filterInput, isLoading }}>
+    <FilterContext.Provider value={{ data: newArr, filterInput, isLoading }}>
       {children}
     </FilterContext.Provider>
   );
