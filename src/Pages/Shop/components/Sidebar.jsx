@@ -1,21 +1,20 @@
-import {
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  makeStyles,
-  MenuItem,
-  Slider,
-  TextField,
-  Typography,
-  InputLabel,
-  Select,
-} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import MenuItem from "@material-ui/core/MenuItem";
+import Slider from "@material-ui/core/Slider";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 import React from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { useFilterContext } from "../../../shared/context/FilterContext";
 import { FormControl } from "@material-ui/core";
+
 const arr = ["red", "green", "purple", "deeppink", "orange"];
 
 const Sidebar = () => {

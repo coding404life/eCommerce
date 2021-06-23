@@ -1,7 +1,10 @@
 import Sidebar from "../components/Sidebar";
 import Products from "../components/Products";
 import TopBar from "../components/TopBar";
-import { Box, CircularProgress, Container, Grid } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 import { Banner, BreadCrumb } from "../../../shared";
 import { useProductContextProvider } from "../../../shared/context/ProductContext";
 import { useFilterContext } from "../../../shared/context/FilterContext";

@@ -1,4 +1,8 @@
-import { Box, Grid, Hidden, makeStyles, Typography } from "@material-ui/core";
+import Hidden from "@material-ui/core/Hidden";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Grid from "@material-ui/core/Grid";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { AmounButton } from "../../../shared";

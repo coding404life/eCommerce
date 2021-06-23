@@ -20,7 +20,7 @@ export const FilterProvider = ({ children }) => {
   const newArr = data.filter((product) =>
     product.name.includes(state.inputText)
   );
-  console.log(newArr);
+  // console.log(newArr);
 
   //4. function to get the input data
   const filterInput = (inputData) => {

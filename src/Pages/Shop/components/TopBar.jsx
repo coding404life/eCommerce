@@ -1,11 +1,10 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  makeStyles,
-  MenuItem,
-  Select,
-} from "@material-ui/core";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
 import React from "react";
 import GridOnOutlinedIcon from "@material-ui/icons/GridOnOutlined";
 import ReorderOutlinedIcon from "@material-ui/icons/ReorderOutlined";

@@ -1,12 +1,10 @@
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  Grid,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { Link, useParams } from "react-router-dom";
