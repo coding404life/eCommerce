@@ -8,9 +8,10 @@ import { formatPrice } from "../../../shared/util/formatPrice";
 import { Link } from "react-router-dom";
 
 const Products = (props) => {
-  const { data } = props;
   const classes = useStyles();
-  const title = data.name.slice(0, 29);
+
+  const { data } = props;
+  const title = data.name.slice(0, 30);
 
   return (
     <Box
@@ -37,10 +38,6 @@ const Products = (props) => {
       </Box>
       <Box display="flex" justifyContent="space-between" mt={3}>
         <Typography>{title}</Typography>
-        {/* <LocalMallOutlinedIcon
-          className={classes.cursor}
-          onClick={() => addTocartHandler(data)}
-        /> */}
       </Box>
       <Typography variant="h6" color="primary">
         <Box fontWeight="700">{formatPrice(data.price)}</Box>

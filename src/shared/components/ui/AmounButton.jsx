@@ -2,21 +2,8 @@ import { IconButton, Typography, makeStyles, Box } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
-const AmounButton = (props) => {
+const AmounButton = ({ itemAmount, decreaseItemCount, increaseItemCount }) => {
   const classes = useStyles();
-  const { itemAmount, setItemAmount } = props;
-
-  const increaseItemCount = () => {
-    if (itemAmount < 10) {
-      setItemAmount(itemAmount + 1);
-    }
-  };
-
-  const decreaseItemCount = () => {
-    if (itemAmount > 1) {
-      setItemAmount(itemAmount - 1);
-    }
-  };
 
   return (
     <Box>
@@ -33,7 +20,7 @@ const AmounButton = (props) => {
           component="span"
           className={classes.productNumber}
         >
-          {itemAmount >= 1 ? itemAmount : setItemAmount(1)}
+          {itemAmount}
         </Typography>
         <IconButton
           color="secondary"

@@ -8,22 +8,18 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
+import CartItem from "./components/CartItem";
 import { BreadCrumb } from "../../shared";
 import { formatPrice } from "../../shared/util/formatPrice";
 import { Link } from "react-router-dom";
-import CartItem from "./components/CartItem";
-import { useProductContextProvider } from "../../shared/context/ProductContext";
+import { useDispatch, useSelector } from "react-redux";
+import { clearListHandler } from "../../shared/store/action-creators/index";
 
 const ShoppingCart = () => {
   const classes = useStyles();
 
-  const { cart, removeItemFromCart, clearListHandler, editCart } =
-    useProductContextProvider();
-
-  // [219.9, 223, 559.9, 31.98]
-  let totalCost = 0;
-  const shipping = 10;
-  cart.forEach((item) => (totalCost += item.totalPrice));
+  const cartReducer = useSelector((state) => state.cartReducer);
+  const dispatch = useDispatch();
 
   return (
     <Container>
@@ -56,12 +52,12 @@ const ShoppingCart = () => {
         </Hidden>
         <Box my={3}>
           {/*start loop throught cart array */}
-          {cart.map((cur) => (
+          {cartReducer.cart.map((cur) => (
             <CartItem
               key={cur.id}
-              item={cur}
-              removeItemHandler={removeItemFromCart}
-              editCartHandler={editCart}
+              product={cur}
+              // removeItemHandler={removeItemFromCart}
+              // editCartHandler={editCart}
             />
           ))}
           {/*end loop throught cart array */}
@@ -79,7 +75,7 @@ const ShoppingCart = () => {
             <Button
               variant="contained"
               color="secondary"
-              onClick={clearListHandler}
+              onClick={() => dispatch(clearListHandler())}
             >
               clear shopping cart
             </Button>
@@ -98,7 +94,7 @@ const ShoppingCart = () => {
                   >
                     <Typography variant="h6">Cart subtotal</Typography>
                     <Typography variant="h6">
-                      {formatPrice(totalCost)}
+                      {formatPrice(cartReducer.totalPrice)}
                     </Typography>
                   </Box>
                   <Divider />
@@ -109,9 +105,7 @@ const ShoppingCart = () => {
                     mt={3}
                   >
                     <Typography variant="h6">Shipping and handling</Typography>
-                    <Typography variant="h6">
-                      {formatPrice(shipping)}
-                    </Typography>
+                    <Typography variant="h6">{formatPrice(10)}</Typography>
                   </Box>
                   <Divider />
                   <Box
@@ -122,7 +116,7 @@ const ShoppingCart = () => {
                   >
                     <Typography variant="h6">Cart Totals</Typography>
                     <Typography variant="h6" color="primary">
-                      {formatPrice(totalCost + shipping)}
+                      {formatPrice(cartReducer.totalPrice + 10)}
                     </Typography>
                   </Box>
                   <Divider />

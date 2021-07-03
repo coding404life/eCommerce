@@ -6,23 +6,41 @@ import Grid from "@material-ui/core/Grid";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { AmounButton } from "../../../shared";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  removeItemFromCart,
+  editCartItem,
+} from "../../../shared/store/action-creators/index";
 
-const CartItem = ({ item, removeItemHandler, editCartHandler }) => {
-  const [itemAmount, setItemAmount] = useState(item.amount);
-
+const CartItem = ({ product }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [itemAmount, setItemAmount] = useState(product.amount);
 
-  const product = {
-    ...item,
-    amount: itemAmount,
-    totalPrice: item.price * itemAmount,
+  const increaseItemHandler = () => {
+    if (itemAmount < 10) {
+      let amount;
+      setItemAmount((prev) => {
+        amount = prev + 1;
+        return amount;
+      });
+
+      dispatch(editCartItem(product, amount));
+    }
   };
 
-  useEffect(() => {
-    editCartHandler(product);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemAmount]);
+  const decreaseItemHandler = () => {
+    if (itemAmount > 1) {
+      let amount;
+      setItemAmount((prev) => {
+        amount = prev - 1;
+        return amount;
+      });
+
+      dispatch(editCartItem(product, amount));
+    }
+  };
 
   return (
     <Grid container justify="space-between" alignItems="center">
@@ -59,7 +77,11 @@ const CartItem = ({ item, removeItemHandler, editCartHandler }) => {
         </Grid>
       </Hidden>
 
-      <AmounButton setItemAmount={setItemAmount} itemAmount={product.amount} />
+      <AmounButton
+        itemAmount={itemAmount}
+        increaseItemCount={increaseItemHandler}
+        decreaseItemCount={decreaseItemHandler}
+      />
 
       <Grid container item xs={1} sm={2} justify="space-between">
         <Hidden xsDown>
@@ -69,7 +91,7 @@ const CartItem = ({ item, removeItemHandler, editCartHandler }) => {
         </Hidden>
         <DeleteIcon
           className={classes.closeIcon}
-          onClick={() => removeItemHandler(product.id)}
+          onClick={() => dispatch(removeItemFromCart(product))}
         />
       </Grid>
     </Grid>

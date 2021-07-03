@@ -8,29 +8,39 @@ import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { Link, useParams } from "react-router-dom";
-import { useProductContextProvider } from "../../../shared/context/ProductContext";
 import { CircularProgress } from "@material-ui/core";
 import useFetch from "../../../shared/hooks/useFetch";
 import { AmounButton, BreadCrumb } from "../../../shared";
+import { useDispatch } from "react-redux";
+import { addTocart } from "../../../shared/store/action-creators/index";
 
 const SingleProduct = () => {
-  const classes = useStyles();
-  const { addTocart } = useProductContextProvider();
   const [itemAmount, setItemAmount] = useState(1);
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
   const { id } = useParams();
   const productID = id.slice(1, id.length);
   const { data, isLoading } = useFetch(
     `https://course-api.com/react-store-single-product?id=${productID}`
   );
 
+  const increaseItemCount = () => {
+    if (itemAmount < 10) {
+      setItemAmount(itemAmount + 1);
+    }
+  };
+
+  const decreaseItemCount = () => {
+    if (itemAmount > 1) {
+      setItemAmount(itemAmount - 1);
+    }
+  };
+
   const productData = {
     ...data,
     amount: itemAmount,
     totalPrice: data.price * itemAmount,
-  };
-
-  const addtItemHandler = () => {
-    addTocart(productData);
   };
 
   return (
@@ -121,7 +131,8 @@ const SingleProduct = () => {
               </Typography>
               <AmounButton
                 itemAmount={itemAmount}
-                setItemAmount={setItemAmount}
+                increaseItemCount={increaseItemCount}
+                decreaseItemCount={decreaseItemCount}
               />
 
               <Box mt={3}>
@@ -129,7 +140,7 @@ const SingleProduct = () => {
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={addtItemHandler}
+                    onClick={() => dispatch(addTocart(productData))}
                   >
                     add to cart
                   </Button>

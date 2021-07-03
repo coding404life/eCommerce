@@ -9,16 +9,17 @@ import {
   Badge,
   Hidden,
 } from "@material-ui/core";
-// import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import MenuOpenOutlinedIcon from "@material-ui/icons/MenuOpenOutlined";
 import useStyles from "./Style";
 import { Link } from "react-router-dom";
-import { useProductContextProvider } from "../../context/ProductContext";
+// import { useProductContextProvider } from "../../context/ProductContext";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const classes = useStyles();
-  const { cart } = useProductContextProvider();
+  // const { cart } = useProductContextProvider();
+  const cart = useSelector((state) => state.cartReducer);
 
   return (
     <AppBar position="static" className={classes.root}>

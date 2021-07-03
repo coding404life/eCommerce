@@ -6,11 +6,9 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { Banner, BreadCrumb } from "../../../shared";
-import { useProductContextProvider } from "../../../shared/context/ProductContext";
 import { useFilterContext } from "../../../shared/context/FilterContext";
 
 const Shop = () => {
-  const { addTocart } = useProductContextProvider();
   const { data, isLoading } = useFilterContext();
 
   return (
@@ -35,11 +33,7 @@ const Shop = () => {
                   {/* Start loop throught items from API */}
                   {data.map((product) => (
                     <Grid item xs={12} sm={4} key={product.id}>
-                      <Products
-                        data={product}
-                        isloading={isLoading}
-                        addTocartHandler={addTocart}
-                      />
+                      <Products data={product} isloading={isLoading} />
                     </Grid>
                   ))}
                   {/* End loop throught items from API */}
