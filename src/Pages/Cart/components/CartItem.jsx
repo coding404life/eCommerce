@@ -65,7 +65,7 @@ const CartItem = ({ product }) => {
         <Grid container item xs={6} alignItems="center">
           <img
             className={classes.productImage}
-            src={product.image}
+            src={product.images[0].url}
             alt="product"
           />
           <Box>
