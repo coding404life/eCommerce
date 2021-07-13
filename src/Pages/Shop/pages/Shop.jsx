@@ -6,10 +6,18 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { Banner, BreadCrumb } from "../../../shared";
-import { useFilterContext } from "../../../shared/context/FilterContext";
+import { useSelector } from "react-redux";
 
-const Shop = () => {
-  const { data, isLoading } = useFilterContext();
+const Shop = (props) => {
+  const { data, isLoading } = props;
+  const inputValue = useSelector((state) => state.filterReducer.value);
+
+  const result = data.filter((item) => {
+    return item.name.includes(inputValue) || item.company.includes(inputValue);
+  });
+
+  console.log(inputValue);
+  console.log(result);
 
   return (
     <Box mb={5}>
@@ -19,7 +27,7 @@ const Shop = () => {
         <Box mt={4}>
           <Grid container>
             <Grid item xs={12} sm={2}>
-              <Sidebar data />
+              <Sidebar />
             </Grid>
             <Grid item xs={12} sm={10}>
               <TopBar />
@@ -31,7 +39,7 @@ const Shop = () => {
                     </Grid>
                   )}
                   {/* Start loop throught items from API */}
-                  {data.map((product) => (
+                  {result.map((product) => (
                     <Grid item xs={12} sm={4} key={product.id}>
                       <Products data={product} isloading={isLoading} />
                     </Grid>

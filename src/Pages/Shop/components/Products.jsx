@@ -37,7 +37,7 @@ const Products = (props) => {
         </Link>
       </Box>
       <Box display="flex" justifyContent="space-between" mt={3}>
-        <Typography>{title}</Typography>
+        <Typography className={classes.title}>{title}</Typography>
       </Box>
       <Typography variant="h6" color="primary">
         <Box fontWeight="700">{formatPrice(data.price)}</Box>
@@ -100,6 +100,10 @@ const useStyles = makeStyles((theme) => ({
   },
   cursor: {
     cursor: "pointer",
+  },
+  title: {
+    textTransform: "capitalize",
+    fontWeight: 500,
   },
 }));
 

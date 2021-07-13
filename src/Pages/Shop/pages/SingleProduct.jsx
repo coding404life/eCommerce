@@ -12,7 +12,7 @@ import { CircularProgress } from "@material-ui/core";
 import useFetch from "../../../shared/hooks/useFetch";
 import { AmounButton, BreadCrumb } from "../../../shared";
 import { useDispatch } from "react-redux";
-import { addTocart } from "../../../shared/store/action-creators/index";
+import { addTocart } from "../../../store/actions/cartActions";
 
 const SingleProduct = () => {
   const [itemAmount, setItemAmount] = useState(1);

@@ -8,9 +8,13 @@ import {
 import { ThemeProvider } from "@material-ui/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "../shared/util/ScrollToTop";
+import useFetch from "../shared/hooks/useFetch";
 
 const App = () => {
   const classes = useStyles();
+  const { data, isLoading } = useFetch(
+    "https://course-api.com/react-store-products"
+  );
 
   return (
     <Router>
@@ -21,7 +25,9 @@ const App = () => {
         <main className={classes.main}>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/shop" component={Shop} />
+            <Route path="/shop">
+              <Shop data={data} isLoading={isLoading} />
+            </Route>
             <Route path={"/products:id"} component={SingleProduct} />
             <Route path="/cart" component={ShoppingCart} />
             <Route path="*" component={NotFound} />

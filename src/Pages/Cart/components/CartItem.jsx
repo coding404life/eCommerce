@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import {
   removeItemFromCart,
   editCartItem,
-} from "../../../shared/store/action-creators/index";
+} from "../../../store/actions/cartActions";
 
 const CartItem = ({ product }) => {
   const classes = useStyles();

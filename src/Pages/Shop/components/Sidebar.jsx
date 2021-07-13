@@ -12,17 +12,19 @@ import Select from "@material-ui/core/Select";
 import React from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import { formatPrice } from "../../../shared/util/formatPrice";
-import { useFilterContext } from "../../../shared/context/FilterContext";
 import { FormControl } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { inputValue } from "../../../store/actions/filterActions";
 
 const arr = ["red", "green", "purple", "deeppink", "orange"];
 
 const Sidebar = () => {
   const classes = useStyles();
-  const { filterInput } = useFilterContext();
   const [value, setValue] = React.useState([0, 5000]);
   const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
+
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -42,21 +44,25 @@ const Sidebar = () => {
 
   return (
     <Box mt={1} className={classes.root}>
-      <Box>
+      <Box className={classes.searchInput}>
         <TextField
           label="Search input"
-          margin="normal"
+          margin="dense"
           variant="outlined"
-          onChange={(e) => filterInput(e.target.value)}
+          onChange={(e) =>
+            dispatch(inputValue(e.target.value.toLowerCase().trim()))
+          }
         />
       </Box>
       <Box>
         <Typography variant="h5">Categories</Typography>
         <Button>All</Button>
-        <Button>men's clothing</Button>
-        <Button>jewelery</Button>
-        <Button>electronics</Button>
-        <Button>women's clothing</Button>
+        <Button>living room</Button>
+        <Button>office</Button>
+        <Button>kitchen</Button>
+        <Button>bedroom</Button>
+        <Button>dining</Button>
+        <Button>kids</Button>
       </Box>
       <Divider />
       <Box my={1}>
@@ -163,6 +169,9 @@ const useStyles = makeStyles((theme) => ({
   colorWrapper: {
     display: "flex",
     alignItems: "center",
+  },
+  searchInput: {
+    // padding: "10px 14px",
   },
 }));
 

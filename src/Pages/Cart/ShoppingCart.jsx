@@ -13,7 +13,7 @@ import { BreadCrumb } from "../../shared";
 import { formatPrice } from "../../shared/util/formatPrice";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearListHandler } from "../../shared/store/action-creators/index";
+import { clearListHandler } from "../../store/actions/cartActions";
 
 const ShoppingCart = () => {
   const classes = useStyles();
