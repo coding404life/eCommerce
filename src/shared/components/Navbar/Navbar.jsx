@@ -43,9 +43,9 @@ const Navbar = () => {
               <Button className={classes.button}>
                 <Link to="/about">about</Link>
               </Button>
-              <Button className={classes.button}>
+              {/* <Button className={classes.button}>
                 <Link to="/contact">contact</Link>
-              </Button>
+              </Button> */}
             </Box>
           </Hidden>
           <Box>

@@ -2,22 +2,25 @@ import Sidebar from "../components/Sidebar";
 import Products from "../components/Products";
 import TopBar from "../components/TopBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { Banner, BreadCrumb } from "../../../shared";
 import { useSelector } from "react-redux";
 
-const Shop = (props) => {
-  const { data, isLoading } = props;
-  const inputValue = useSelector((state) => state.filterReducer.value);
+const Shop = ({ isLoading, error }) => {
+  const filterState = useSelector((state) => state.filterReducer);
 
-  const result = data.filter((item) => {
-    return item.name.includes(inputValue) || item.company.includes(inputValue);
-  });
+  console.log(filterState);
 
-  console.log(inputValue);
-  console.log(result);
+  // const result = data.filter((item) => {
+  //   return (
+  //     item.name.includes(filterState.name) &&
+  //     item.category.includes(filterState.category) &&
+  //     item.company.includes(filterState.company)
+  //   );
+  // });
 
   return (
     <Box mb={5}>
@@ -32,19 +35,40 @@ const Shop = (props) => {
             <Grid item xs={12} sm={10}>
               <TopBar />
               <Box px={5}>
-                <Grid container justify="space-between" alignItems="center">
-                  {isLoading && (
-                    <Grid container justify="center">
-                      <CircularProgress />
-                    </Grid>
+                <Grid
+                  container
+                  justify={isLoading ? "center" : "space-between"}
+                  alignItems="center"
+                >
+                  {isLoading ? (
+                    <Box
+                      display="flex"
+                      minHeight="55vh"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Grid container justify="center" alignItems="center">
+                        {error ? (
+                          <Box>
+                            <Typography variant="h3" color="textSecondary">
+                              Products Not Found
+                            </Typography>
+                            <Typography variant="h5" color="textSecondary">
+                              {error}
+                            </Typography>
+                          </Box>
+                        ) : (
+                          <CircularProgress />
+                        )}
+                      </Grid>
+                    </Box>
+                  ) : (
+                    filterState.allProducts.map((product) => (
+                      <Grid item xs={12} sm={4} key={product.id}>
+                        <Products data={product} isloading={isLoading} />
+                      </Grid>
+                    ))
                   )}
-                  {/* Start loop throught items from API */}
-                  {result.map((product) => (
-                    <Grid item xs={12} sm={4} key={product.id}>
-                      <Products data={product} isloading={isLoading} />
-                    </Grid>
-                  ))}
-                  {/* End loop throught items from API */}
                 </Grid>
               </Box>
             </Grid>

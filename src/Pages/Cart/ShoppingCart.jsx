@@ -17,7 +17,7 @@ import { clearListHandler } from "../../store/actions/cartActions";
 
 const ShoppingCart = () => {
   const classes = useStyles();
-
+  console.log("re render");
   const cartReducer = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
 

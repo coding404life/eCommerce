@@ -10,7 +10,8 @@ const useFetch = (url) => {
   //fetch some data
   useEffect(() => {
     let isRendered = false;
-    const fetchMyApi = async () => {
+
+    (async () => {
       try {
         const response = await axios.get(url);
         if (!isRendered) {
@@ -21,12 +22,11 @@ const useFetch = (url) => {
           });
         }
       } catch (error) {
-        setIsLoading(false);
+        setIsLoading(true);
         setError(error.message);
       }
-    };
+    })();
 
-    fetchMyApi();
     return () => {
       isRendered = true;
     };

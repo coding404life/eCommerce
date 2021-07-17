@@ -21,7 +21,7 @@ const SingleProduct = () => {
 
   const { id } = useParams();
   const productID = id.slice(1, id.length);
-  const { data, isLoading } = useFetch(
+  const { data, isLoading, error } = useFetch(
     `https://course-api.com/react-store-single-product?id=${productID}`
   );
 
@@ -46,9 +46,27 @@ const SingleProduct = () => {
   return (
     <Box>
       {isLoading ? (
-        <Grid container justify="center">
-          <CircularProgress />
-        </Grid>
+        <Box
+          display="flex"
+          minHeight="55vh"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Grid container justify="center" alignItems="center">
+            {error ? (
+              <Box>
+                <Typography variant="h3" color="textSecondary">
+                  Product Not Found
+                </Typography>
+                <Typography variant="h5" color="textSecondary">
+                  {error}
+                </Typography>
+              </Box>
+            ) : (
+              <CircularProgress />
+            )}
+          </Grid>
+        </Box>
       ) : (
         <Container>
           <BreadCrumb thisRoute="Spacing chair design" />

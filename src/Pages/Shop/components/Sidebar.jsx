@@ -7,39 +7,36 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import React from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { FormControl } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { inputValue } from "../../../store/actions/filterActions";
+import {
+  inputValue,
+  filterCategory,
+  filterCompany,
+} from "../../../store/actions/filterActions";
 
 const arr = ["red", "green", "purple", "deeppink", "orange"];
 
 const Sidebar = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState([0, 5000]);
+  const [value, setValue] = React.useState([0, 500000]);
   const [age, setAge] = React.useState("");
-  const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setAge(event.target.value);
+    dispatch(filterCompany(event.target.value));
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleSliderChange = (newValue) => {
+  const handleSliderChange = (event, newValue) => {
     setValue(newValue);
+    // dispatch(filterPrice(newValue));
+    console.log(newValue);
   };
 
   return (
@@ -49,42 +46,47 @@ const Sidebar = () => {
           label="Search input"
           margin="dense"
           variant="outlined"
-          onChange={(e) =>
-            dispatch(inputValue(e.target.value.toLowerCase().trim()))
-          }
+          onChange={(e) => dispatch(inputValue(e.target.value))}
         />
       </Box>
       <Box>
         <Typography variant="h5">Categories</Typography>
-        <Button>All</Button>
-        <Button>living room</Button>
-        <Button>office</Button>
-        <Button>kitchen</Button>
-        <Button>bedroom</Button>
-        <Button>dining</Button>
-        <Button>kids</Button>
+        <Button onClick={() => dispatch(filterCategory(""))}>All</Button>
+        <Button onClick={() => dispatch(filterCategory("living room"))}>
+          living room
+        </Button>
+        <Button onClick={() => dispatch(filterCategory("office"))}>
+          office
+        </Button>
+        <Button onClick={() => dispatch(filterCategory("kitchen"))}>
+          kitchen
+        </Button>
+        <Button onClick={() => dispatch(filterCategory("bedroom"))}>
+          bedroom
+        </Button>
+        <Button onClick={() => dispatch(filterCategory("dining"))}>
+          dining
+        </Button>
+        <Button onClick={() => dispatch(filterCategory("kids"))}>kids</Button>
       </Box>
       <Divider />
       <Box my={1}>
         <Typography variant="h5">Company</Typography>
         <FormControl className={classes.formControl}>
-          <InputLabel id="demo-controlled-open-select-label">
-            Company
-          </InputLabel>
           <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
             value={age}
             onChange={handleChange}
+            displayEmpty
+            className={classes.selectEmpty}
+            inputProps={{ "aria-label": "Without label" }}
           >
-            <MenuItem value="ALL">ALL</MenuItem>
-            <MenuItem value="Marcos">Marcos</MenuItem>
-            <MenuItem value="Liddy">Liddy</MenuItem>
-            <MenuItem value="Ikea">Ikea</MenuItem>
-            <MenuItem value="Caressa">Caressa</MenuItem>
+            <MenuItem value="">
+              <span>ALL</span>{" "}
+            </MenuItem>
+            <MenuItem value="marcos">Marcos</MenuItem>
+            <MenuItem value="middy">Liddy</MenuItem>
+            <MenuItem value="ikea">Ikea</MenuItem>
+            <MenuItem value="caressa">Caressa</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -119,12 +121,12 @@ const Sidebar = () => {
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
             min={0}
-            max={5000}
+            max={500000}
           />
           <Typography>
             {" "}
-            Your range of Price is between <br /> {formatPrice(value[0])} / and{" "}
-            {formatPrice(value[1])}
+            Your range of Price is
+            <br /> From {formatPrice(value[0])} To {formatPrice(value[1])}
           </Typography>
         </Box>
         <Button variant="contained" color="secondary">

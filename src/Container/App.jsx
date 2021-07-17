@@ -9,12 +9,21 @@ import { ThemeProvider } from "@material-ui/styles";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "../shared/util/ScrollToTop";
 import useFetch from "../shared/hooks/useFetch";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { loadProducts } from "../store/actions/filterActions";
 
 const App = () => {
   const classes = useStyles();
-  const { data, isLoading } = useFetch(
+  const disptach = useDispatch();
+
+  const { data, isLoading, error } = useFetch(
     "https://course-api.com/react-store-products"
   );
+
+  useEffect(() => {
+    disptach(loadProducts(data));
+  }, [data, disptach]);
 
   return (
     <Router>
@@ -26,7 +35,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/shop">
-              <Shop data={data} isLoading={isLoading} />
+              <Shop isLoading={isLoading} error={error} />
             </Route>
             <Route path={"/products:id"} component={SingleProduct} />
             <Route path="/cart" component={ShoppingCart} />
