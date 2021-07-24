@@ -14,14 +14,6 @@ const Shop = ({ isLoading, error }) => {
 
   console.log(filterState);
 
-  // const result = data.filter((item) => {
-  //   return (
-  //     item.name.includes(filterState.name) &&
-  //     item.category.includes(filterState.category) &&
-  //     item.company.includes(filterState.company)
-  //   );
-  // });
-
   return (
     <Box mb={5}>
       <Banner />
@@ -63,7 +55,7 @@ const Shop = ({ isLoading, error }) => {
                       </Grid>
                     </Box>
                   ) : (
-                    filterState.allProducts.map((product) => (
+                    filterState.filteredProducts.map((product) => (
                       <Grid item xs={12} sm={4} key={product.id}>
                         <Products data={product} isloading={isLoading} />
                       </Grid>

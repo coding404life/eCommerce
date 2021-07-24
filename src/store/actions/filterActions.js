@@ -29,9 +29,23 @@ export const filterCompany = (company) => {
   };
 };
 
+export const filterColor = (color) => {
+  return {
+    type: filterTypes.FILTER_COLOR,
+    payload: color,
+  };
+};
+
 export const filterPrice = (priceRange) => {
   return {
     type: filterTypes.FILTER_PRICE,
     payload: priceRange,
+  };
+};
+
+export const clearFilter = (arr) => {
+  return {
+    type: filterTypes.CLEAR_FILTER,
+    payload: arr,
   };
 };

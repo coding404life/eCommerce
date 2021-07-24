@@ -5,10 +5,11 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import CheckIcon from "@material-ui/icons/Check";
 import React, { useState } from "react";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { Link, useParams } from "react-router-dom";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, IconButton } from "@material-ui/core";
 import useFetch from "../../../shared/hooks/useFetch";
 import { AmounButton, BreadCrumb } from "../../../shared";
 import { useDispatch } from "react-redux";
@@ -141,7 +142,24 @@ const SingleProduct = () => {
                 </Box>
               </Box>
               <Divider />
-
+              <Box display="flex" mt={4}>
+                <Box mr={3}>
+                  <Typography variant="h6">Color: </Typography>
+                </Box>
+                <Box className={classes.colorWrapper}>
+                  {productData.colors.map((color, index) => {
+                    return (
+                      <IconButton
+                        key={index}
+                        className={classes.iconButton}
+                        style={{ backgroundColor: color }}
+                      >
+                        <CheckIcon className={classes.checkIcon} />
+                      </IconButton>
+                    );
+                  })}
+                </Box>
+              </Box>
               <Typography variant="h6" color="primary">
                 <Box fontWeight="bold" mt={1}>
                   Total Price : {formatPrice(productData.totalPrice)}

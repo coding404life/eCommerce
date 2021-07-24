@@ -8,25 +8,32 @@ import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Select from "@material-ui/core/Select";
-import React from "react";
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined";
 import { formatPrice } from "../../../shared/util/formatPrice";
 import { FormControl } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   inputValue,
   filterCategory,
   filterCompany,
+  filterPrice,
+  filterColor,
+  clearFilter,
 } from "../../../store/actions/filterActions";
+import { useEffect, useState } from "react";
 
-const arr = ["red", "green", "purple", "deeppink", "orange"];
+const arr = ["#00ff00", "#0000ff", "#ff0000", "#000", "#ffb900"];
 
 const Sidebar = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState([0, 500000]);
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = useState("");
+  const value = useSelector((state) => state.filterReducer.price);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(filterColor(arr));
+  }, [dispatch]);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -34,9 +41,7 @@ const Sidebar = () => {
   };
 
   const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
-    // dispatch(filterPrice(newValue));
-    console.log(newValue);
+    dispatch(filterPrice(newValue));
   };
 
   return (
@@ -84,7 +89,7 @@ const Sidebar = () => {
               <span>ALL</span>{" "}
             </MenuItem>
             <MenuItem value="marcos">Marcos</MenuItem>
-            <MenuItem value="middy">Liddy</MenuItem>
+            <MenuItem value="liddy">Liddy</MenuItem>
             <MenuItem value="ikea">Ikea</MenuItem>
             <MenuItem value="caressa">Caressa</MenuItem>
           </Select>
@@ -94,13 +99,19 @@ const Sidebar = () => {
       <Box my={1}>
         <Typography variant="h5">Colors</Typography>
         <Box className={classes.colorWrapper}>
-          <IconButton className={classes.allBtn}>ALL</IconButton>
+          <IconButton
+            className={classes.allBtn}
+            onClick={() => dispatch(filterColor(arr))}
+          >
+            ALL
+          </IconButton>
           {arr.map((color, index) => {
             return (
               <IconButton
                 key={index}
                 className={classes.iconButton}
                 style={{ backgroundColor: color }}
+                onClick={() => dispatch(filterColor(color))}
               >
                 <CheckOutlinedIcon className={classes.checkIcon} />
               </IconButton>
@@ -120,16 +131,19 @@ const Sidebar = () => {
             onChange={handleSliderChange}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
-            min={0}
             max={500000}
           />
           <Typography>
             {" "}
-            Your range of Price is
-            <br /> From {formatPrice(value[0])} To {formatPrice(value[1])}
+            Price is&nbsp;
+            {formatPrice(value)}
           </Typography>
         </Box>
-        <Button variant="contained" color="secondary">
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => dispatch(clearFilter(arr))}
+        >
           Clear Filter
         </Button>
       </Box>
@@ -171,9 +185,6 @@ const useStyles = makeStyles((theme) => ({
   colorWrapper: {
     display: "flex",
     alignItems: "center",
-  },
-  searchInput: {
-    // padding: "10px 14px",
   },
 }));
 
