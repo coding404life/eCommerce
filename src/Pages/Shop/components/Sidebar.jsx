@@ -22,17 +22,26 @@ import {
 } from "../../../store/actions/filterActions";
 import { useEffect, useState } from "react";
 
-const arr = ["#00ff00", "#0000ff", "#ff0000", "#000", "#ffb900"];
+const colors = ["#00ff00", "#0000ff", "#ff0000", "#000", "#ffb900"];
+const category = [
+  "",
+  "living room",
+  "office",
+  "kitchen",
+  "bedroom",
+  "dining",
+  "kids",
+];
 
 const Sidebar = () => {
   const classes = useStyles();
   const [age, setAge] = useState("");
-  const value = useSelector((state) => state.filterReducer.price);
+  const filter = useSelector((state) => state.filterReducer);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(filterColor(arr));
+    dispatch(filterColor(colors));
   }, [dispatch]);
 
   const handleChange = (event) => {
@@ -56,23 +65,15 @@ const Sidebar = () => {
       </Box>
       <Box>
         <Typography variant="h5">Categories</Typography>
-        <Button onClick={() => dispatch(filterCategory(""))}>All</Button>
-        <Button onClick={() => dispatch(filterCategory("living room"))}>
-          living room
-        </Button>
-        <Button onClick={() => dispatch(filterCategory("office"))}>
-          office
-        </Button>
-        <Button onClick={() => dispatch(filterCategory("kitchen"))}>
-          kitchen
-        </Button>
-        <Button onClick={() => dispatch(filterCategory("bedroom"))}>
-          bedroom
-        </Button>
-        <Button onClick={() => dispatch(filterCategory("dining"))}>
-          dining
-        </Button>
-        <Button onClick={() => dispatch(filterCategory("kids"))}>kids</Button>
+        {category.map((cat, index) => (
+          <Button
+            key={index}
+            onClick={() => dispatch(filterCategory(cat))}
+            variant={filter.category === cat ? "contained" : "text"}
+          >
+            {cat === "" ? "all" : cat}
+          </Button>
+        ))}
       </Box>
       <Divider />
       <Box my={1}>
@@ -100,12 +101,12 @@ const Sidebar = () => {
         <Typography variant="h5">Colors</Typography>
         <Box className={classes.colorWrapper}>
           <IconButton
-            className={classes.allBtn}
-            onClick={() => dispatch(filterColor(arr))}
+            className={filter.color === "" ? classes.lineText : classes.allBtn}
+            onClick={() => dispatch(filterColor(colors))}
           >
             ALL
           </IconButton>
-          {arr.map((color, index) => {
+          {colors.map((color, index) => {
             return (
               <IconButton
                 key={index}
@@ -113,7 +114,9 @@ const Sidebar = () => {
                 style={{ backgroundColor: color }}
                 onClick={() => dispatch(filterColor(color))}
               >
-                <CheckOutlinedIcon className={classes.checkIcon} />
+                {filter.color === color ? (
+                  <CheckOutlinedIcon className={classes.checkIcon} />
+                ) : null}
               </IconButton>
             );
           })}
@@ -127,7 +130,7 @@ const Sidebar = () => {
             Select Price Range:
           </Typography>
           <Slider
-            value={value}
+            value={filter.price}
             onChange={handleSliderChange}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
@@ -136,13 +139,13 @@ const Sidebar = () => {
           <Typography>
             {" "}
             Price is&nbsp;
-            {formatPrice(value)}
+            {formatPrice(filter.price)}
           </Typography>
         </Box>
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => dispatch(clearFilter(arr))}
+          onClick={() => dispatch(clearFilter(colors))}
         >
           Clear Filter
         </Button>
@@ -185,6 +188,11 @@ const useStyles = makeStyles((theme) => ({
   colorWrapper: {
     display: "flex",
     alignItems: "center",
+  },
+  lineText: {
+    width: "4vmax",
+    fontSize: "1.2rem",
+    textDecoration: "underline",
   },
 }));
 

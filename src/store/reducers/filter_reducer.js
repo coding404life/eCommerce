@@ -8,11 +8,12 @@ const initalState = {
   name: "",
   category: "",
   company: "",
-  color: "",
+  color: [],
   price: 500000,
 };
 
 const result = (data, curState) => {
+  window.scrollTo(0, 470);
   return data.filter((item) => {
     return (
       item.name.includes(curState.name) &&

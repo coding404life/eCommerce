@@ -1,8 +1,7 @@
 export const formatPrice = (number) => {
   const formatedPrice = new Intl.NumberFormat("en-US", {
-    style: "decimal",
+    style: "currency",
     currency: "USD",
-    // maximumSignificantDigits: 2,
-  }).format(number);
-  return "$" + formatedPrice;
+  }).format(number / 100);
+  return formatedPrice;
 };

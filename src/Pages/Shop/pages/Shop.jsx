@@ -1,6 +1,6 @@
 import Sidebar from "../components/Sidebar";
 import Products from "../components/Products";
-import TopBar from "../components/TopBar";
+// import TopBar from "../components/TopBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -11,8 +11,6 @@ import { useSelector } from "react-redux";
 
 const Shop = ({ isLoading, error }) => {
   const filterState = useSelector((state) => state.filterReducer);
-
-  console.log(filterState);
 
   return (
     <Box mb={5}>
@@ -25,7 +23,7 @@ const Shop = ({ isLoading, error }) => {
               <Sidebar />
             </Grid>
             <Grid item xs={12} sm={10}>
-              <TopBar />
+              {/* <TopBar /> */}
               <Box px={5}>
                 <Grid
                   container

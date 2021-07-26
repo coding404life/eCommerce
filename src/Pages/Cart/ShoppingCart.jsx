@@ -53,12 +53,7 @@ const ShoppingCart = () => {
         <Box my={3}>
           {/*start loop throught cart array */}
           {cartReducer.cart.map((cur) => (
-            <CartItem
-              key={cur.id}
-              product={cur}
-              // removeItemHandler={removeItemFromCart}
-              // editCartHandler={editCart}
-            />
+            <CartItem key={cur.id} product={cur} />
           ))}
           {/*end loop throught cart array */}
           <Divider />
@@ -105,7 +100,7 @@ const ShoppingCart = () => {
                     mt={3}
                   >
                     <Typography variant="h6">Shipping and handling</Typography>
-                    <Typography variant="h6">{formatPrice(10)}</Typography>
+                    <Typography variant="h6">{formatPrice(1000)}</Typography>
                   </Box>
                   <Divider />
                   <Box
