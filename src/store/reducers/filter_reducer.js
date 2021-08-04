@@ -2,6 +2,8 @@
 import { filterTypes } from "../action-types/filterTypes";
 import produce from "immer";
 
+const scrollTop = () => window.scrollTo(0, 470);
+
 const initalState = {
   products: [],
   filteredProducts: [],
@@ -13,7 +15,6 @@ const initalState = {
 };
 
 const result = (data, curState) => {
-  window.scrollTo(0, 470);
   return data.filter((item) => {
     return (
       item.name.includes(curState.name) &&
@@ -39,18 +40,22 @@ const filterReducer = (state = initalState, { type, payload }) =>
       case filterTypes.FILTER_CATEGORY:
         draftState.category = payload;
         draftState.filteredProducts = result(draftState.products, draftState);
+        scrollTop();
         break;
       case filterTypes.FILTER_COMPANY:
         draftState.company = payload;
         draftState.filteredProducts = result(draftState.products, draftState);
+        scrollTop();
         break;
       case filterTypes.FILTER_PRICE:
         draftState.price = payload;
         draftState.filteredProducts = result(draftState.products, draftState);
+        scrollTop();
         break;
       case filterTypes.FILTER_COLOR:
         draftState.color = payload;
         draftState.filteredProducts = result(draftState.products, draftState);
+        scrollTop();
         break;
       case filterTypes.CLEAR_FILTER:
         draftState.name = initalState.name;

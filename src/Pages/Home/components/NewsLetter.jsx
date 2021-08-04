@@ -2,7 +2,6 @@ import Box from "@material-ui/core/Box";
 import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import InputAdornment from "@material-ui/core/InputAdornment";
-
 import { makeStyles } from "@material-ui/core";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
 import NewsLetterBg from "../../../assets/newsler.jpg";
