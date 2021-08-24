@@ -24,43 +24,41 @@ const Shop = ({ isLoading, error }) => {
             </Grid>
             <Grid item xs={12} sm={10}>
               {/* <TopBar /> */}
-              <Box px={5}>
-                <Grid
-                  container
-                  justify={isLoading ? "center" : "space-between"}
-                  alignItems="center"
-                >
-                  {isLoading ? (
-                    <Box
-                      display="flex"
-                      minHeight="55vh"
-                      alignItems="center"
-                      justifyContent="center"
-                    >
-                      <Grid container justify="center" alignItems="center">
-                        {error ? (
-                          <Box>
-                            <Typography variant="h3" color="textSecondary">
-                              Products Not Found
-                            </Typography>
-                            <Typography variant="h5" color="textSecondary">
-                              {error}
-                            </Typography>
-                          </Box>
-                        ) : (
-                          <CircularProgress />
-                        )}
-                      </Grid>
-                    </Box>
-                  ) : (
-                    filterState.filteredProducts.map((product) => (
-                      <Grid item xs={12} sm={4} key={product.id}>
-                        <Products data={product} isloading={isLoading} />
-                      </Grid>
-                    ))
-                  )}
-                </Grid>
-              </Box>
+              <Grid
+                container
+                justify={isLoading ? "center" : "space-between"}
+                alignItems="center"
+              >
+                {isLoading ? (
+                  <Box
+                    display="flex"
+                    minHeight="55vh"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Grid container justify="center" alignItems="center">
+                      {error ? (
+                        <Box>
+                          <Typography variant="h3" color="textSecondary">
+                            Products Not Found
+                          </Typography>
+                          <Typography variant="h5" color="textSecondary">
+                            {error}
+                          </Typography>
+                        </Box>
+                      ) : (
+                        <CircularProgress />
+                      )}
+                    </Grid>
+                  </Box>
+                ) : (
+                  filterState.filteredProducts.map((product) => (
+                    <Grid item xs={12} sm={6} lg={4} key={product.id}>
+                      <Products data={product} isloading={isLoading} />
+                    </Grid>
+                  ))
+                )}
+              </Grid>
             </Grid>
           </Grid>
         </Box>

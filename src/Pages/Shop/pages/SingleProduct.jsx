@@ -211,7 +211,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f5f5f5",
     width: "8vmax",
     height: "8vmax",
-    margin: `0 1rem`,
+    margin: `0 1rem 0 0`,
   },
   iconButton: {
     backgroundColor: "#f00",

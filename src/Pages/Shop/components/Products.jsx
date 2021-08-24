@@ -17,18 +17,14 @@ const Products = (props) => {
     <Box
       id={data.id}
       px={3}
-      py={3}
+      pt={3}
       display="flex"
       flexDirection="column"
       style={{ transition: "all 0.3s linear" }}
     >
       <Box className={classes.container}>
         <div className={classes.overlay + " overlay"}></div>
-        <img
-          className={classes.imgStyle}
-          src={data.image}
-          alt="https://picsum.photos/200/300"
-        />
+        <img className={classes.imgStyle} src={data.image} alt={data.image} />
         <Link
           className={classes.searchIcon + " show"}
           to={`/products:${data.id}`}
@@ -38,10 +34,10 @@ const Products = (props) => {
       </Box>
       <Box display="flex" justifyContent="space-between" mt={3}>
         <Typography className={classes.title}>{title}</Typography>
+        <Typography className={classes.title} color="primary">
+          {formatPrice(data.price)}
+        </Typography>
       </Box>
-      <Typography variant="h6" color="primary">
-        <Box fontWeight="700">{formatPrice(data.price)}</Box>
-      </Typography>
     </Box>
   );
 };
@@ -93,10 +89,13 @@ const useStyles = makeStyles((theme) => ({
   imgStyle: {
     width: "100%",
     borderRadius: 5,
-    height: "20vmax",
-    [theme.breakpoints.down("sm")]: {
-      maxHeight: "25vmax",
-    },
+    height: "13rem",
+    // [theme.breakpoints.down("sm")]: {
+    //   maxHeight: "20vmax",
+    // },
+    // [theme.breakpoints.up("xl")]: {
+    //   height: "13vmax",
+    // },
   },
   cursor: {
     cursor: "pointer",

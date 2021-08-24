@@ -37,7 +37,6 @@ const Sidebar = () => {
   const classes = useStyles();
   const [age, setAge] = useState("");
   const filter = useSelector((state) => state.filterReducer);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -70,6 +69,7 @@ const Sidebar = () => {
             key={index}
             onClick={() => dispatch(filterCategory(cat))}
             variant={filter.category === cat ? "contained" : "text"}
+            style={{ margin: "5px 0" }}
           >
             {cat === "" ? "all" : cat}
           </Button>
@@ -99,9 +99,13 @@ const Sidebar = () => {
       <Divider />
       <Box my={1}>
         <Typography variant="h5">Colors</Typography>
-        <Box className={classes.colorWrapper}>
+        <Box className={classes.selectedColor}>
           <IconButton
-            className={filter.color === "" ? classes.lineText : classes.allBtn}
+            className={
+              filter.color.constructor === Array
+                ? classes.lineText
+                : classes.allBtn
+            }
             onClick={() => dispatch(filterColor(colors))}
           >
             ALL
@@ -125,7 +129,7 @@ const Sidebar = () => {
       <Divider />
       <Box mt={1}>
         <Typography variant="h5">Price</Typography>
-        <Box mb={1}>
+        <Box mb={1} pr={1}>
           <Typography id="range-slider" gutterBottom>
             Select Price Range:
           </Typography>
@@ -146,6 +150,7 @@ const Sidebar = () => {
           variant="contained"
           color="secondary"
           onClick={() => dispatch(clearFilter(colors))}
+          className={classes.responsiveButton}
         >
           Clear Filter
         </Button>
@@ -178,21 +183,31 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   allBtn: {
-    width: "4vmax",
+    minWidth: "1rem",
     fontSize: "1.2rem",
   },
   checkIcon: {
     color: "#fff",
     fontSize: "1rem",
   },
-  colorWrapper: {
+  selectedColor: {
     display: "flex",
     alignItems: "center",
+    flexWrap: "wrap",
+    [theme.breakpoints.up("lg")]: {
+      flexWrap: "nowrap",
+    },
   },
   lineText: {
-    width: "4vmax",
+    minWidth: "1rem",
     fontSize: "1.2rem",
     textDecoration: "underline",
+  },
+  responsiveButton: {
+    [theme.breakpoints.up("lg")]: {
+      fontSize: ".7vmax",
+    },
+    fontSize: "1.3vmax",
   },
 }));
 
