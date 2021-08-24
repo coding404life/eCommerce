@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SideDrawer from "../SideDrawer/SideDrawer";
 import React from "react";
+
 const Navbar = () => {
   const classes = useStyles();
   const cart = useSelector((state) => state.cartReducer);
@@ -52,6 +53,8 @@ const Navbar = () => {
                 <Link to="/about">about</Link>
               </Button>
             </Box>
+            <Box flexGrow={1} />
+
             <Link to="cart">
               <IconButton className={classes.IconButton}>
                 <Badge badgeContent={cart.length} color="primary">
@@ -59,7 +62,12 @@ const Navbar = () => {
                 </Badge>
               </IconButton>
             </Link>
+            <Button className={classes.button}>
+              <Link to="/auth">Login</Link>
+            </Button>
           </Hidden>
+
+          {/* SideDrawer on small screen */}
           <Hidden only={["lg", "xl", "md"]}>
             <SideDrawer
               toggleDrawerHandler={toggleDrawerHandler}

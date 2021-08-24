@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Footer, Navbar } from "../shared";
-// import { Home, Shop, SingleProduct, ShoppingCart } from "../Pages";
 import {
   makeStyles,
   unstable_createMuiStrictModeTheme as createMuiTheme,
@@ -18,6 +17,7 @@ import Grid from "@material-ui/core/Grid";
 
 const Home = React.lazy(() => import("../Pages/Home/Home"));
 const Shop = React.lazy(() => import("../Pages/Shop/pages/Shop"));
+const Auth = React.lazy(() => import("../Auth/AuthForm"));
 const SingleProduct = React.lazy(() =>
   import("../Pages/Shop/pages/SingleProduct")
 );
@@ -57,6 +57,7 @@ const App = () => {
               </Route>
               <Route path={"/products:id"} component={SingleProduct} />
               <Route path="/cart" component={ShoppingCart} />
+              <Route path="/auth" component={Auth} />
               <Route path="*" component={NotFound} />
             </Switch>
           </Suspense>
