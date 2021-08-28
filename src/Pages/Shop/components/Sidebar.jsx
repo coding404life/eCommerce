@@ -67,6 +67,7 @@ const Sidebar = () => {
         {category.map((cat, index) => (
           <Button
             key={index}
+            color="secondary"
             onClick={() => dispatch(filterCategory(cat))}
             variant={filter.category === cat ? "contained" : "text"}
             style={{ margin: "5px 0" }}
