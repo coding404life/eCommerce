@@ -206,9 +206,9 @@ const useStyles = makeStyles((theme) => ({
   },
   responsiveButton: {
     [theme.breakpoints.up("lg")]: {
-      fontSize: ".7vmax",
+      fontSize: ".9rem",
     },
-    fontSize: "1.3vmax",
+    fontSize: ".8rem",
   },
 }));
 

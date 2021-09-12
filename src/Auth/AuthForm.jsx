@@ -1,4 +1,11 @@
-import { Box, Grid, Typography, TextField, Button } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  makeStyles,
+} from "@material-ui/core";
 import axios from "axios";
 import { useState, useRef } from "react";
 
@@ -6,6 +13,7 @@ const AuthForm = () => {
   const emailInputRef = useRef();
   const passInputRef = useRef();
 
+  const classes = useStyles();
   const [isLogin, setIsLogin] = useState(true);
 
   // const [valdiationMsg, setValidationMsg] = useState({
@@ -13,7 +21,7 @@ const AuthForm = () => {
   //   passValidation: "",
   // });
 
-  const loginSignupHandler = () => {
+  const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
 
@@ -58,9 +66,10 @@ const AuthForm = () => {
   return (
     <Grid container direction="column" justify="center" alignItems="center">
       <Box
-        mt={4}
+        my={4}
         py={5}
-        px={8}
+        px={2}
+        width={"30vmax"}
         border={1}
         textAlign="center"
         borderRadius="borderRadius"
@@ -68,30 +77,36 @@ const AuthForm = () => {
         <Typography variant="h5">{isLogin ? "Login" : "Sign Up"}</Typography>
 
         <form onSubmit={formSubmitHandler}>
-          <Box py={3} px={3}>
+          <Box pt={2}>
             <TextField
               required
               label="Email"
               type="email"
-              size="medium"
               inputRef={emailInputRef}
+              className={classes.inputField}
             />
           </Box>
-          <Box pb={4} px={3}>
+          <Box py={4}>
             <TextField
+              className={classes.inputField}
               required
               label="Password"
               type="password"
               inputRef={passInputRef}
             />
           </Box>
-
           <Button variant="contained" color="secondary" type="submit">
-            {isLogin ? "Login" : "Create Account"}
+            <Typography>{isLogin ? "Login" : "Create Account"}</Typography>
           </Button>
           <Box flexGrow={1} my={2}></Box>
-          <Button variant="text" color="secondary" onClick={loginSignupHandler}>
-            {isLogin ? "Create new account" : "Login with existing account"}
+          <Button
+            variant="text"
+            color="secondary"
+            onClick={switchAuthModeHandler}
+          >
+            <Typography>
+              {isLogin ? "Create new account" : "Login with existing account"}
+            </Typography>
           </Button>
         </form>
       </Box>
@@ -99,4 +114,9 @@ const AuthForm = () => {
   );
 };
 
+const useStyles = makeStyles({
+  inputField: {
+    width: "100%",
+  },
+});
 export default AuthForm;
