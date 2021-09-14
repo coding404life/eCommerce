@@ -7,13 +7,13 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import CheckIcon from "@material-ui/icons/Check";
 import React, { useState } from "react";
-import { formatPrice } from "../../../shared/util/formatPrice";
+import { formatPrice } from "../../shared/util/formatPrice";
 import { Link, useParams } from "react-router-dom";
 import { CircularProgress, IconButton } from "@material-ui/core";
-import useFetch from "../../../shared/hooks/useFetch";
-import { AmounButton, BreadCrumb } from "../../../shared";
+import useFetch from "../../shared/hooks/useFetch";
+import { AmounButton, BreadCrumb } from "../../shared";
 import { useDispatch } from "react-redux";
-import { addTocart } from "../../../store/actions/cartActions";
+import { addTocart } from "../../store/actions/cartActions";
 
 const SingleProduct = () => {
   const [itemAmount, setItemAmount] = useState(1);

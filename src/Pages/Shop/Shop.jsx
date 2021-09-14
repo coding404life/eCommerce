@@ -1,12 +1,11 @@
-import Sidebar from "../components/Sidebar";
-import Products from "../components/Products";
-// import TopBar from "../components/TopBar";
+import Sidebar from "./components/Sidebar";
+import Products from "./components/Products";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import { Banner, BreadCrumb } from "../../../shared";
+import { Banner, BreadCrumb } from "../../shared";
 import { useSelector } from "react-redux";
 
 const Shop = ({ isLoading, error }) => {

@@ -15,12 +15,10 @@ import useFetch from "../shared/hooks/useFetch";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 
-const Home = React.lazy(() => import("../Pages/Home/Home"));
-const Shop = React.lazy(() => import("../Pages/Shop/pages/Shop"));
-const Auth = React.lazy(() => import("../Auth/AuthForm"));
-const SingleProduct = React.lazy(() =>
-  import("../Pages/Shop/pages/SingleProduct")
-);
+const Home = React.lazy(() => import("../Pages/Home/index"));
+const Shop = React.lazy(() => import("../Pages/Shop/Shop"));
+const Auth = React.lazy(() => import("../shared/Auth/AuthForm"));
+const SingleProduct = React.lazy(() => import("../Pages/Shop/SingleProduct"));
 const ShoppingCart = React.lazy(() => import("../Pages/Cart/ShoppingCart"));
 const NotFound = React.lazy(() => import("../shared/components/404/NotFound"));
 
