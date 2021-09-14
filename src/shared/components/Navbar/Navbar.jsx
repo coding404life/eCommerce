@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -12,16 +13,19 @@ import {
 } from "@material-ui/core";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import MenuOpenOutlinedIcon from "@material-ui/icons/MenuOpenOutlined";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SideDrawer from "../SideDrawer/SideDrawer";
-import React from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../store/actions/authActions";
 
 const Navbar = () => {
+  const history = useHistory();
   const classes = useStyles();
   const cart = useSelector((state) => state.cartReducer);
+  const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
   const [toggleDrawer, setToggleDrawer] = React.useState(false);
-
+  const dispatch = useDispatch();
   const toggleDrawerHandler = () => {
     setToggleDrawer(!toggleDrawer);
   };
@@ -52,6 +56,11 @@ const Navbar = () => {
               <Button className={classes.button}>
                 <Link to="/about">about</Link>
               </Button>
+              {isLoggedIn && (
+                <Button className={classes.button}>
+                  <Link to="/checkout">Checkout</Link>
+                </Button>
+              )}
             </Box>
             <Box flexGrow={1} />
 
@@ -62,9 +71,22 @@ const Navbar = () => {
                 </Badge>
               </IconButton>
             </Link>
-            <Button className={classes.button}>
-              <Link to="/auth">Login</Link>
-            </Button>
+            {!isLoggedIn && (
+              <Button className={classes.button}>
+                <Link to="/auth">Login</Link>
+              </Button>
+            )}
+            {isLoggedIn && (
+              <Button
+                className={classes.button}
+                onClick={() => {
+                  dispatch(logout());
+                  history.replace("/auth");
+                }}
+              >
+                Logout
+              </Button>
+            )}
           </Hidden>
 
           {/* SideDrawer on small screen */}

@@ -80,7 +80,12 @@ const SingleProduct = () => {
                   className={classes.productImg}
                 />
               </Box>
-              <Box display="flex" my={3} justifyContent="center">
+              <Box
+                display="flex"
+                my={3}
+                justifyContent="center"
+                flexWrap="wrap"
+              >
                 <img
                   src={data.images[1].url}
                   alt="chair"
@@ -210,8 +215,8 @@ const useStyles = makeStyles((theme) => ({
   subImg: {
     backgroundColor: "#f5f5f5",
     width: "8vmax",
-    height: "8vmax",
-    margin: `0 1rem 0 0`,
+    objectFit: "cover",
+    margin: `0 1rem 1rem 0`,
   },
   iconButton: {
     backgroundColor: "#f00",

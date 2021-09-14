@@ -8,8 +8,13 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { login } from "../../store/actions/authActions";
 
 const AuthForm = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const emailInputRef = useRef();
   const passInputRef = useRef();
 
@@ -30,6 +35,7 @@ const AuthForm = () => {
 
     const emailValue = emailInputRef.current.value;
     const passValue = passInputRef.current.value;
+
     // make some validation
     console.log(emailValue, passValue);
     let url;
@@ -56,7 +62,11 @@ const AuthForm = () => {
           },
         }
       );
-      console.log(response.data);
+      if (response.data) {
+        console.log(response.data);
+        dispatch(login(response.data.idToken));
+        history.replace("/shop");
+      }
     } catch (err) {
       console.log(err.response.data);
       alert(err.response.data.error.message);

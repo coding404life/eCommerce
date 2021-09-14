@@ -22,7 +22,6 @@ const Shop = ({ isLoading, error }) => {
               <Sidebar />
             </Grid>
             <Grid item xs={12} sm={10}>
-              {/* <TopBar /> */}
               <Grid
                 container
                 justify={isLoading ? "center" : "space-between"}

@@ -55,7 +55,6 @@ const filterReducer = (state = initalState, { type, payload }) =>
       case filterTypes.FILTER_COLOR:
         draftState.color = payload;
         draftState.filteredProducts = result(draftState.products, draftState);
-        scrollTop();
         break;
       case filterTypes.CLEAR_FILTER:
         draftState.name = initalState.name;
