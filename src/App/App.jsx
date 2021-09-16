@@ -15,12 +15,18 @@ import useFetch from "../shared/hooks/useFetch";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
 const Home = React.lazy(() => import("../Pages/Home/index"));
 const Shop = React.lazy(() => import("../Pages/Shop/Shop"));
 const Auth = React.lazy(() => import("../shared/Auth/AuthForm"));
 const SingleProduct = React.lazy(() => import("../Pages/Shop/SingleProduct"));
 const ShoppingCart = React.lazy(() => import("../Pages/Cart/ShoppingCart"));
 const NotFound = React.lazy(() => import("../shared/components/404/NotFound"));
+
+// const calculateRemainingTime = (expirationTime) => expirationTime - Date.now();
 
 const App = () => {
   const classes = useStyles();
@@ -82,5 +88,23 @@ const useStyles = makeStyles({
     minHeight: "55vh",
   },
 });
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAKacoCVILsLiRrE_e_nLhY75S5LzUmam4",
+  authDomain: "eren-commerce.firebaseapp.com",
+  projectId: "eren-commerce",
+  storageBucket: "eren-commerce.appspot.com",
+  messagingSenderId: "929457248222",
+  appId: "1:929457248222:web:b685529096402f03a7af4f",
+  measurementId: "G-PQPNP9YLG6",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+getAnalytics(app);
 
 export default App;

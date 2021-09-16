@@ -6,7 +6,6 @@ const initialState = {
   isLoggedIn: false,
   logoutTimer: null,
 };
-// const calculateRemainingTime = (expirationTime) => expirationTime - Date.now();
 
 const authReducer = (state = initialState, { type, payload }) =>
   produce(state, (draftState) => {
@@ -16,8 +15,6 @@ const authReducer = (state = initialState, { type, payload }) =>
         draftState.isLoggedIn = !!payload.token;
         localStorage.setItem("token", payload.token);
         localStorage.setItem("expirationTime", payload.expirationTime);
-        // const remainingTime = calculateRemainingTime(payload.expirationTime);
-        // draftState.logoutTimer = setTimeout(logoutHandler, remainingTime);
 
         console.log("idtoken is " + draftState.isLoggedIn);
         return;
@@ -26,9 +23,6 @@ const authReducer = (state = initialState, { type, payload }) =>
         localStorage.removeItem("token");
         localStorage.removeItem("expirationTime");
 
-        if (draftState.logoutTimer) {
-          clearTimeout(draftState.logoutTimer);
-        }
         return;
       default:
         return draftState;

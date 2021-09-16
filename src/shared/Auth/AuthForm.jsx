@@ -37,7 +37,7 @@ const AuthForm = () => {
     const passValue = passInputRef.current.value;
 
     // make some validation
-    console.log(emailValue, passValue);
+    // console.log(emailValue, passValue);
     let url;
 
     if (isLogin) {
@@ -64,7 +64,7 @@ const AuthForm = () => {
       );
       if (response.data) {
         console.log(response.data);
-        dispatch(login(response.data.idToken));
+        dispatch(login(response.data.idToken, response.data.expiresIn));
         history.replace("/shop");
       }
     } catch (err) {
