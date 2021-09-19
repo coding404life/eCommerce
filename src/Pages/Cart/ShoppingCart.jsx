@@ -123,7 +123,7 @@ const ShoppingCart = () => {
                     color="primary"
                     className={classes.shoppingButtons}
                   >
-                    Proceed to checkout
+                    <Link to="/checkout">Proceed to checkout</Link>
                   </Button>
                 </Grid>
               </Grid>
@@ -158,6 +158,11 @@ const useStyles = makeStyles((theme) => ({
   },
   shoppingButtons: {
     color: "#fff",
+    "& a": {
+      color: "#fff",
+      textDecoration: "none",
+      width: "100%",
+    },
   },
 }));
 

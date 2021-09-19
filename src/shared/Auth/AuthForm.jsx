@@ -10,21 +10,17 @@ import axios from "axios";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { login } from "../../store/actions/authActions";
+import { login, logout } from "../../store/actions/authActions";
 
 const AuthForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+
   const emailInputRef = useRef();
   const passInputRef = useRef();
 
   const classes = useStyles();
   const [isLogin, setIsLogin] = useState(true);
-
-  // const [valdiationMsg, setValidationMsg] = useState({
-  //   emailValidation: "",
-  //   passValidation: "",
-  // });
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -37,7 +33,6 @@ const AuthForm = () => {
     const passValue = passInputRef.current.value;
 
     // make some validation
-    // console.log(emailValue, passValue);
     let url;
 
     if (isLogin) {
@@ -62,13 +57,14 @@ const AuthForm = () => {
           },
         }
       );
+
       if (response.data) {
-        console.log(response.data);
-        dispatch(login(response.data.idToken, response.data.expiresIn));
-        history.replace("/shop");
+        const expirationTime = Date.now() + response.data.expiresIn * 1000;
+        dispatch(login(response.data.idToken, expirationTime));
+        setTimeout(() => dispatch(logout()), expirationTime - Date.now());
+        history.replace("/");
       }
     } catch (err) {
-      console.log(err.response.data);
       alert(err.response.data.error.message);
     }
   };
@@ -129,4 +125,5 @@ const useStyles = makeStyles({
     width: "100%",
   },
 });
+
 export default AuthForm;

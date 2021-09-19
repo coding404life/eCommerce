@@ -10,20 +10,23 @@ const initialState = {
 const authReducer = (state = initialState, { type, payload }) =>
   produce(state, (draftState) => {
     switch (type) {
+      case authTypes.LOGIN_STATE_HANDLER:
+        draftState.isLoggedIn = !!payload;
+        return;
+
       case authTypes.LOGIN_HANDLER:
         draftState.token = payload.token;
         draftState.isLoggedIn = !!payload.token;
         localStorage.setItem("token", payload.token);
         localStorage.setItem("expirationTime", payload.expirationTime);
-
-        console.log("idtoken is " + draftState.isLoggedIn);
         return;
+
       case authTypes.LOGOUT_HANDLER:
-        draftState.isLoggedIn = payload;
+        draftState.isLoggedIn = false;
         localStorage.removeItem("token");
         localStorage.removeItem("expirationTime");
-
         return;
+
       default:
         return draftState;
     }

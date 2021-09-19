@@ -10,7 +10,13 @@ export const login = (token, expirationTime) => {
 
 export const logout = () => {
   return {
-    type: authTypes.LOGIN_HANDLER,
-    payload: false,
+    type: authTypes.LOGOUT_HANDLER,
+  };
+};
+
+export const setLoginState = (loginState) => {
+  return {
+    type: authTypes.LOGIN_STATE_HANDLER,
+    payload: loginState,
   };
 };
