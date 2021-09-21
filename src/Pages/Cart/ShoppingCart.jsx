@@ -14,11 +14,33 @@ import { formatPrice } from "../../shared/util/formatPrice";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearListHandler } from "../../store/actions/cartActions";
+import axios from "axios";
 
 const ShoppingCart = () => {
   const classes = useStyles();
   const cartReducer = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
+
+  const stripeCheckoutHandler = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4242/create-checkout-session",
+        {
+          items: cartReducer.cart,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      if (response.data) {
+        window.location = response.data.url;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <Container>
@@ -122,8 +144,9 @@ const ShoppingCart = () => {
                     variant="contained"
                     color="primary"
                     className={classes.shoppingButtons}
+                    onClick={stripeCheckoutHandler}
                   >
-                    <Link to="/checkout">Proceed to checkout</Link>
+                    Proceed to checkout
                   </Button>
                 </Grid>
               </Grid>
