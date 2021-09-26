@@ -62,12 +62,14 @@ const CartItem = ({ product }) => {
         </Grid>
       </Hidden>
       <Hidden smUp>
-        <Grid container item xs={6} alignItems="center">
-          <img
-            className={classes.productImage}
-            src={product.images[0].url}
-            alt="product"
-          />
+        <Grid container item xs={6} alignItems="center" justify="space-between">
+          <Box mb={1}>
+            <img
+              className={classes.productImage}
+              src={product.images[0].url}
+              alt="product"
+            />
+          </Box>
           <Box>
             <Typography variant="subtitle1">{product.name}</Typography>
             <Typography variant="subtitle1" color="primary">

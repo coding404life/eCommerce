@@ -95,6 +95,21 @@ const Navbar = () => {
               toggleDrawerHandler={toggleDrawerHandler}
               toggleDrawer={toggleDrawer}
             >
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <MenuOpenOutlinedIcon
+                  className={`${classes.logoIcon} ${classes.sideDrawerLogo}`}
+                />
+                <Box fontWeight="fontWeightBold" pr={5}>
+                  <Typography variant="h5">
+                    <Link to="/" className={`${classes.logo}`}>
+                      EREN
+                    </Link>
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* Menu Button */}
+              <Box mt={1} />
               <Button
                 className={classes.button}
                 onClick={() => setToggleDrawer(false)}
@@ -113,6 +128,14 @@ const Navbar = () => {
               >
                 <Link to="/about">about</Link>
               </Button>
+              {isLoggedIn && (
+                <Button className={classes.button}>
+                  <Link to="/checkout">Checkout</Link>
+                </Button>
+              )}
+              <Box mt={1} />
+
+              {/* cart button */}
               <Link to="cart">
                 <IconButton
                   className={classes.IconButton}
@@ -123,6 +146,28 @@ const Navbar = () => {
                   </Badge>
                 </IconButton>
               </Link>
+
+              {/* Auth Buttons */}
+              {!isLoggedIn && (
+                <Button
+                  className={classes.button}
+                  onClick={() => setToggleDrawer(false)}
+                >
+                  <Link to="/auth">Login</Link>
+                </Button>
+              )}
+              {isLoggedIn && (
+                <Button
+                  className={classes.button}
+                  onClick={() => {
+                    dispatch(logout());
+                    history.replace("/auth");
+                    setToggleDrawer(false);
+                  }}
+                >
+                  Logout
+                </Button>
+              )}
             </SideDrawer>
           </Hidden>
         </Toolbar>
@@ -153,6 +198,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.primary.contrastText,
     },
+  },
+  sideDrawerLogo: {
+    fontSize: "2.4rem",
   },
   button: {
     color: "#fff",

@@ -21,6 +21,7 @@ const AuthForm = () => {
 
   const classes = useStyles();
   const [isLogin, setIsLogin] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -65,7 +66,14 @@ const AuthForm = () => {
         history.replace("/");
       }
     } catch (err) {
-      alert(err.response.data.error.message);
+      console.log(err.response.data.error.message);
+      if (err.response.data.error.message === "INVALID_PASSWORD") {
+        setErrorMessage("WRONG PASSWORD");
+      } else if (err.response.data.error.message === "EMAIL_NOT_FOUND") {
+        setErrorMessage("EMAIL DOSE NOT EXIST");
+      } else {
+        setErrorMessage(err.response.data.error.message);
+      }
     }
   };
 
@@ -92,7 +100,7 @@ const AuthForm = () => {
               className={classes.inputField}
             />
           </Box>
-          <Box py={4}>
+          <Box pt={4} pb={2}>
             <TextField
               className={classes.inputField}
               required
@@ -101,12 +109,14 @@ const AuthForm = () => {
               inputRef={passInputRef}
             />
           </Box>
+          <Typography className={classes.alert}>{errorMessage}</Typography>
+          <Box flexGrow={1} my={2}></Box>
           <Button variant="contained" color="secondary" type="submit">
             <Typography>{isLogin ? "Login" : "Create Account"}</Typography>
           </Button>
           <Box flexGrow={1} my={2}></Box>
           <Button
-            variant="text"
+            variant="outlined"
             color="secondary"
             onClick={switchAuthModeHandler}
           >
@@ -123,6 +133,9 @@ const AuthForm = () => {
 const useStyles = makeStyles({
   inputField: {
     width: "100%",
+  },
+  alert: {
+    color: "#f00",
   },
 });
 

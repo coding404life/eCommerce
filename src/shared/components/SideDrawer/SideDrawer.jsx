@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     width: "30vmax",
     display: "flex",
     flexDirection: "column",
-    padding: "4rem 1rem",
+    padding: "2rem 1rem",
     textAlign: "center",
   },
   menuIcon: {

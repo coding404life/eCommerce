@@ -69,6 +69,7 @@ const ShoppingCart = () => {
                   continue shopping
                 </Button>
               </Link>
+              <Box mx={1} />
               <Button
                 variant="contained"
                 color="secondary"
@@ -134,7 +135,7 @@ const ShoppingCart = () => {
                       color="primary"
                       className={classes.shoppingButtons}
                     >
-                      <Link to="auth"> login to checkout</Link>
+                      <Link to="auth">login to checkout</Link>
                     </Button>
                   )}
                 </Grid>
