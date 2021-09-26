@@ -14,33 +14,13 @@ import { formatPrice } from "../../shared/util/formatPrice";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearListHandler } from "../../store/actions/cartActions";
-import axios from "axios";
 
 const ShoppingCart = () => {
   const classes = useStyles();
   const cartReducer = useSelector((state) => state.cartReducer);
-  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
 
-  const stripeCheckoutHandler = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:4242/create-checkout-session",
-        {
-          items: cartReducer.cart,
-        },
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
-      if (response.data) {
-        window.location = response.data.url;
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const dispatch = useDispatch();
 
   return (
     <Container>
@@ -140,14 +120,23 @@ const ShoppingCart = () => {
                     </Box>
                     <Divider />
                   </Box>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.shoppingButtons}
-                    onClick={stripeCheckoutHandler}
-                  >
-                    Proceed to checkout
-                  </Button>
+                  {isLoggedIn ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.shoppingButtons}
+                    >
+                      <Link to="checkout">Proceed to checkout</Link>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.shoppingButtons}
+                    >
+                      <Link to="auth"> login to checkout</Link>
+                    </Button>
+                  )}
                 </Grid>
               </Grid>
             </Box>
