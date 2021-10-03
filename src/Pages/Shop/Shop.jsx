@@ -11,26 +11,6 @@ import { useSelector } from "react-redux";
 const Shop = ({ isLoading, error }) => {
   const filterState = useSelector((state) => state.filterReducer);
 
-  // const x = () => {
-  //   if (filterState.products.length) {
-  //     filterState.products.map((item) => {
-  //       return addDoc(collection(db, "products"), {
-  //         category: item.category,
-  //         colors: item.colors,
-  //         company: item.company,
-  //         description: item.description,
-  //         id: item.id,
-  //         image: item.image,
-  //         name: item.name,
-  //         price: item.price,
-  //       });
-  //     });
-  //   }
-  // };
-  // useEffect(() => {
-  //   x();
-  // }, []);
-
   return (
     <Box mb={5}>
       <Banner />

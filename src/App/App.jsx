@@ -12,18 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadProducts } from "../store/actions/filterActions";
 import { logout, setLoginState } from "../store/actions/authActions";
-import {
-  db,
-  firebaseAnlytics,
-  firebasePerformance,
-} from "../shared/util/firebase";
+import { firebaseAnlytics, firebasePerformance } from "../shared/util/firebase";
 import CheckOut from "../Pages/CheckOut/CheckOut";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useFetch from "../shared/hooks/useFetch";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import { Redirect } from "react-router-dom";
-import { collection, getDocs } from "@firebase/firestore";
 import { retriveStoredToken } from "../shared/util/authUtil";
 
 //lazy loading pages
@@ -41,24 +36,13 @@ const App = () => {
   const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
   const tokenData = retriveStoredToken();
 
-  const { isLoading, error } = useFetch(
+  const { data, isLoading, error } = useFetch(
     "https://course-api.com/react-store-products"
   );
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, "products"));
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push(doc.data());
-      });
-      if (data.length) {
-        //load products into redux store
-        dispatch(loadProducts(data));
-      }
-      clearTimeout(timer);
-    };
-
+    //load products into redux store
+    dispatch(loadProducts(data));
     // init firebase Performance SDK
     firebaseAnlytics();
     firebasePerformance();
@@ -69,8 +53,8 @@ const App = () => {
       timer = setTimeout(() => dispatch(logout()), tokenData.duration);
     }
 
-    return () => fetchProducts();
-  }, [dispatch, tokenData]);
+    return () => clearTimeout(timer);
+  }, [data, dispatch, tokenData]);
 
   return (
     <Router>
