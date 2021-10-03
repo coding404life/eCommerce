@@ -12,13 +12,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadProducts } from "../store/actions/filterActions";
 import { logout, setLoginState } from "../store/actions/authActions";
-import { firebaseAnlytics } from "../shared/util/firebase";
+import {
+  db,
+  firebaseAnlytics,
+  firebasePerformance,
+} from "../shared/util/firebase";
 import CheckOut from "../Pages/CheckOut/CheckOut";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useFetch from "../shared/hooks/useFetch";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import { Redirect } from "react-router-dom";
+import { collection, getDocs } from "@firebase/firestore";
+import { retriveStoredToken } from "../shared/util/authUtil";
 
 //lazy loading pages
 const Home = React.lazy(() => import("../Pages/Home/index"));
@@ -28,23 +34,6 @@ const SingleProduct = React.lazy(() => import("../Pages/Shop/SingleProduct"));
 const ShoppingCart = React.lazy(() => import("../Pages/Cart/ShoppingCart"));
 const NotFound = React.lazy(() => import("../shared/components/404/NotFound"));
 
-const retriveStoredToken = () => {
-  const storedToken = localStorage.getItem("token");
-  const storedExpirationDate = localStorage.getItem("expirationTime");
-
-  const remainingTime = storedExpirationDate - Date.now();
-
-  if (remainingTime <= 60000) {
-    localStorage.removeItem("token");
-    localStorage.removeItem("expirationTime");
-    return null;
-  }
-  return {
-    token: storedToken,
-    duration: remainingTime,
-  };
-};
-
 const App = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -52,16 +41,27 @@ const App = () => {
   const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn);
   const tokenData = retriveStoredToken();
 
-  const { data, isLoading, error } = useFetch(
+  const { isLoading, error } = useFetch(
     "https://course-api.com/react-store-products"
   );
 
   useEffect(() => {
-    //load products into redux store
-    dispatch(loadProducts(data));
+    const fetchProducts = async () => {
+      const querySnapshot = await getDocs(collection(db, "products"));
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      if (data.length) {
+        //load products into redux store
+        dispatch(loadProducts(data));
+      }
+      clearTimeout(timer);
+    };
 
     // init firebase Performance SDK
     firebaseAnlytics();
+    firebasePerformance();
 
     let timer;
     if (tokenData) {
@@ -69,8 +69,8 @@ const App = () => {
       timer = setTimeout(() => dispatch(logout()), tokenData.duration);
     }
 
-    return () => clearTimeout(timer);
-  }, [data, dispatch, tokenData]);
+    return () => fetchProducts();
+  }, [dispatch, tokenData]);
 
   return (
     <Router>
