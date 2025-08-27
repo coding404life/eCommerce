@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# eCommerce App – Vite Migration
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app was migrated from Create React App (CRA) to Vite for a faster dev experience while keeping the existing codebase and libraries intact.
 
-## Available Scripts
+## Tech Stack
 
-In the project directory, you can run:
+- React (current project version)
+- Redux + Thunk
+- React Router v5
+- Material‑UI v4
+- Vite (dev/build)
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Install
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+pnpm install
+```
 
-### `npm test`
+### Development (Vite)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+pnpm dev
+```
 
-### `npm run build`
+- Opens on `http://localhost:5173`
+- Entry file: `index.html` → `/src/main.jsx`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Production Build (Vite)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+pnpm build
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Output directory: `dist/`
 
-### `npm run eject`
+### Preview the Build
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+pnpm preview
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Serves `dist/` locally
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Notes after Migration
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- If you see a blank screen, check the browser console for runtime errors first.
+- Some privacy/ad‑block extensions may block Firebase Analytics in dev. Disable them for `localhost`, or guard analytics to only run in production.
+- Chrome warning "Unrecognized feature: 'browsing-topics'" is harmless and can be ignored in dev.
 
-## Learn More
+## CORS in Dev (course-api.com)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The API `https://course-api.com/react-store-products` may block `localhost:5173` due to CORS. Use a Vite dev proxy and call the path instead of the full URL:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. `vite.config.js`
 
-### Code Splitting
+```js
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      "/react-store-products": {
+        target: "https://course-api.com",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
+});
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Replace fetch URL in code (example):
 
-### Analyzing the Bundle Size
+```js
+fetch("/react-store-products");
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Common Dev Issues
 
-### Making a Progressive Web App
+- "Blocked by client" loading Firebase scripts: ad‑block extension; disable for `localhost` or guard analytics for prod only.
+- ReactDOM.findDOMNode error with React 19: some older libs (e.g., MUI v4, certain carousels) still use `findDOMNode`. Use React 18 to avoid it, or upgrade those libs if staying on React 19.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Scripts
 
-### Advanced Configuration
+- `pnpm dev` – start Vite dev server
+- `pnpm build` – build with Vite
+- `pnpm preview` – preview production build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Project Structure
 
-### Deployment
+```
+├── index.html               # Vite entry HTML
+├── vite.config.js           # Vite configuration
+├── src/
+│   ├── main.jsx            # React entry (mounts <App />)
+│   ├── App/                # App shell and routing
+│   ├── Pages/              # Feature pages
+│   ├── shared/             # Shared components & utilities
+│   ├── store/              # Redux store, reducers, actions
+│   └── assets/             # Static assets
+└── package.json            # Scripts and dependencies
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Troubleshooting
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Clear Vite cache if needed: `rm -rf node_modules/.vite`
+- Restart dev server after config changes.
+- Share the first console error for targeted help.
