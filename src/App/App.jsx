@@ -37,7 +37,7 @@ const App = () => {
   const tokenData = retriveStoredToken();
 
   const { data, isLoading, error } = useFetch(
-    "https://course-api.com/react-store-products"
+    "https://68aefe83b91dfcdd62bafa92.mockapi.io/api/v1/product"
   );
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const App = () => {
         <main className={classes.main}>
           <Suspense
             fallback={
-              <Grid container justify="center" alignItems="center">
+              <Grid container justifyContent="center" alignItems="center">
                 <CircularProgress />
               </Grid>
             }

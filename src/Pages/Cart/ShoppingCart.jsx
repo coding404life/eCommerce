@@ -32,7 +32,7 @@ const ShoppingCart = () => {
           </Typography>
           <Hidden smDown>
             <Box my={3} className={classes.root}>
-              <Grid container justify="space-between">
+              <Grid container justifyContent="space-between">
                 <Grid container item sm={2}>
                   <Typography variant="h6">Product photo</Typography>
                 </Grid>
@@ -144,7 +144,7 @@ const ShoppingCart = () => {
           </Box>
         </Box>
       ) : (
-        <Grid container alignItems="center" justify="center">
+        <Grid container alignItems="center" justifyContent="center">
           <Box py={10} textAlign="center">
             <Box pb={2}>
               <Typography variant="h5">Your Cart is Empty</Typography>

@@ -23,7 +23,7 @@ const SingleProduct = () => {
   const { id } = useParams();
   const productID = id.slice(1, id.length);
   const { data, isLoading, error } = useFetch(
-    `https://course-api.com/react-store-single-product?id=${productID}`
+    `https://68aefe83b91dfcdd62bafa92.mockapi.io/api/v1/product/${productID}`
   );
 
   const increaseItemCount = () => {
@@ -53,7 +53,7 @@ const SingleProduct = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Grid container justify="center" alignItems="center">
+          <Grid container justifyContent="center" alignItems="center">
             {error ? (
               <Box>
                 <Typography variant="h3" color="textSecondary">
@@ -71,40 +71,17 @@ const SingleProduct = () => {
       ) : (
         <Container>
           <BreadCrumb thisRoute="Spacing chair design" />
-          <Grid container justify="space-between" className={classes.root}>
+          <Grid
+            container
+            justifyContent="space-between"
+            className={classes.root}
+          >
             <Grid item sm={6} xs={12}>
               <Box className={classes.productImgContainer}>
                 <img
-                  src={data.images[0].url}
+                  src={data.image}
                   alt="chair"
                   className={classes.productImg}
-                />
-              </Box>
-              <Box
-                display="flex"
-                my={3}
-                justifyContent="center"
-                flexWrap="wrap"
-              >
-                <img
-                  src={data.images[1].url}
-                  alt="chair"
-                  className={classes.subImg}
-                />
-                <img
-                  src={data.images[2].url}
-                  alt="chair"
-                  className={classes.subImg}
-                />
-                <img
-                  src={data.images[3].url}
-                  alt="chair"
-                  className={classes.subImg}
-                />
-                <img
-                  src={data.images[4].url}
-                  alt="chair"
-                  className={classes.subImg}
                 />
               </Box>
             </Grid>

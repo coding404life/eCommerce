@@ -43,12 +43,12 @@ const CartItem = ({ product }) => {
   };
 
   return (
-    <Grid container justify="space-between" alignItems="center">
+    <Grid container justifyContent="space-between" alignItems="center">
       <Hidden xsDown>
         <Grid item sm={1} md={2}>
           <img
             className={classes.productImage}
-            src={product.images[0].url}
+            src={product.image}
             alt="product"
           />
         </Grid>
@@ -62,11 +62,17 @@ const CartItem = ({ product }) => {
         </Grid>
       </Hidden>
       <Hidden smUp>
-        <Grid container item xs={6} alignItems="center" justify="space-between">
+        <Grid
+          container
+          item
+          xs={6}
+          alignItems="center"
+          justifyContent="space-between"
+        >
           <Box mb={1}>
             <img
               className={classes.productImage}
-              src={product.images[0].url}
+              src={product.image}
               alt="product"
             />
           </Box>
@@ -85,7 +91,7 @@ const CartItem = ({ product }) => {
         decreaseItemCount={decreaseItemHandler}
       />
 
-      <Grid container item xs={1} sm={2} justify="space-between">
+      <Grid container item xs={1} sm={2} justifyContent="space-between">
         <Hidden xsDown>
           <Typography variant="subtitle1" color="primary">
             <Box fontWeight="bold">{formatPrice(product.totalPrice)}</Box>

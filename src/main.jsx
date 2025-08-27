@@ -1,10 +1,12 @@
-import React from "react";
+import React, { StrictMode, Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
-import App from "./App/App";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reducers from "./store/reducers/index";
 import thunk from "redux-thunk";
+import Splash from "./shared/components/Splash/Splash";
+
+const App = lazy(() => import("./App/App"));
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -14,10 +16,12 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
-      <App />
+      <Suspense fallback={<Splash />}>
+        <App />
+      </Suspense>
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root")
 );

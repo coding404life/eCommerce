@@ -40,7 +40,7 @@ const CheckOut = () => {
   return (
     <>
       {cartReducer.cart.length ? (
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           <Grid item xs={11} sm={6} md={6}>
             <Box my={3} textAlign="center">
               <Typography variant="h5">Checkout</Typography>
@@ -95,7 +95,7 @@ const CheckOut = () => {
           </Grid>
         </Grid>
       ) : (
-        <Grid container alignItems="center" justify="center">
+        <Grid container alignItems="center" justifyContent="center">
           <Box py={10} textAlign="center">
             <Box pb={2}>
               <Typography variant="h5">Your Cart is Empty</Typography>

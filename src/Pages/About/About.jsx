@@ -4,7 +4,7 @@ import React from "react";
 const CheckOut = () => {
   return (
     <>
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Box my={3} px={4} textAlign="center">
           <Typography variant="h5">Our Story</Typography>
           <Typography variant="body1">

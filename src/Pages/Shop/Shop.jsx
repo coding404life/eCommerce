@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const Shop = ({ isLoading, error }) => {
   const filterState = useSelector((state) => state.filterReducer);
 
+  console.log(filterState);
   return (
     <Box mb={5}>
       <Banner />
@@ -24,7 +25,7 @@ const Shop = ({ isLoading, error }) => {
             <Grid item xs={12} sm={10}>
               <Grid
                 container
-                justify={isLoading ? "center" : "space-between"}
+                justifyContent={isLoading ? "center" : "space-between"}
                 alignItems="center"
               >
                 {isLoading ? (
@@ -34,7 +35,7 @@ const Shop = ({ isLoading, error }) => {
                     alignItems="center"
                     justifyContent="center"
                   >
-                    <Grid container justify="center" alignItems="center">
+                    <Grid container justifyContent="center" alignItems="center">
                       {error ? (
                         <Box>
                           <Typography variant="h3" color="textSecondary">

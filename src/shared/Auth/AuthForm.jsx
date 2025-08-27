@@ -78,7 +78,12 @@ const AuthForm = () => {
   };
 
   return (
-    <Grid container direction="column" justify="center" alignItems="center">
+    <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+    >
       <Box
         my={4}
         py={5}
