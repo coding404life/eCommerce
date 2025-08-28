@@ -1,6 +1,6 @@
 # eCommerce App
 
-![Uploading image.png…]()
+<img width="1405" height="872" alt="image" src="https://github.com/user-attachments/assets/52e658a4-541c-4641-90c9-c0c23b00ef52" />
 
 This app was migrated from Create React App (CRA) to Vite for a faster dev experience while keeping the existing codebase and libraries intact.
 
