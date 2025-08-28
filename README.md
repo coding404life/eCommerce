@@ -1,4 +1,6 @@
-# eCommerce App – Vite Migration
+# eCommerce App
+
+![Uploading image.png…]()
 
 This app was migrated from Create React App (CRA) to Vite for a faster dev experience while keeping the existing codebase and libraries intact.
 
