@@ -1,4 +1,4 @@
-import React, { StrictMode, Suspense, lazy } from "react";
+import { StrictMode, Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";

@@ -6,11 +6,10 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import axios from "axios";
-import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../shared/util/formatPrice";
+import axios from "axios";
 
 const CheckOut = () => {
   const classes = useStyles();
@@ -18,8 +17,8 @@ const CheckOut = () => {
 
   const stripeCheckoutHandler = async () => {
     try {
-      const response = await axios.post(
-        "https://stripe-checkout-nodejs.herokuapp.com/create-checkout-session",
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_STRIPE_SERVER_BASE}/create-checkout-session`,
         {
           items: cartReducer.cart,
         },
@@ -29,8 +28,9 @@ const CheckOut = () => {
           },
         }
       );
-      if (response.data) {
-        window.location = response.data.url;
+
+      if (data) {
+        window.location.assign(data.url);
       }
     } catch (e) {
       console.error(e);
@@ -116,7 +116,7 @@ const CheckOut = () => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     textTransform: "uppercase",
   },
