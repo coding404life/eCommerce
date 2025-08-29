@@ -18,7 +18,9 @@ const CheckOut = () => {
   const stripeCheckoutHandler = async () => {
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_STRIPE_SERVER_BASE}/create-checkout-session`,
+        `${
+          import.meta.env.VITE_STRIPE_SERVER_BASE
+        }/api/create-checkout-session`,
         {
           items: cartReducer.cart,
         },
